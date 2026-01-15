@@ -1,0 +1,21 @@
+name: Deploy to GCP VM via Self-Hosted Runner
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    name: Build & Deploy on GCP VM
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Build and Deploy with Docker
+        run: |
+          docker build -t sysmos-dashboard .
+          docker stop sysmos-app || true
+          docker rm sysmos-app || true
+          docker run -d -p 3000:3000 --name sysmos-app sysmos-dashboard
