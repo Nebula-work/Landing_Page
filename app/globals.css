@@ -10,6 +10,32 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+  
+  @keyframes breathing {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.01);
+    }
+  }
+  
+  @keyframes breathing-highlighted {
+    0%, 100% {
+      transform: scale(1.05);
+    }
+    50% {
+      transform: scale(1.06);
+    }
+  }
+  
+  .animate-breathing {
+    animation: breathing 4s ease-in-out infinite;
+  }
+  
+  .animate-breathing-highlighted {
+    animation: breathing-highlighted 4s ease-in-out infinite;
+  }
 }
 
 @layer base {

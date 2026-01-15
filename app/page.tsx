@@ -1,12 +1,42 @@
+"use client"
+
 import Link from "next/link"
 import Image from "next/image"
-import { Check, Server, Shield, Zap } from "lucide-react"
+import { useState } from "react"
+import { Check, Server, Shield, Zap, Cloud, Workflow } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { ModeToggle } from "@/components/mode-toggle"
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog"
+import { Label } from "@/components/ui/label"
 
 export default function LandingPage() {
+  const [isWaitlistOpen, setIsWaitlistOpen] = useState(false)
+  const [name, setName] = useState("")
+  const [email, setEmail] = useState("")
+
+  const handleJoinWaitlist = () => {
+    setIsWaitlistOpen(true)
+  }
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    // Handle form submission here
+    console.log("Waitlist submission:", { name, email })
+    // You can add API call here
+    setIsWaitlistOpen(false)
+    setName("")
+    setEmail("")
+  }
   return (
     <div className="flex min-h-screen flex-col items-center justify-between bg-background">
       <header className="sticky items-center flex top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -49,8 +79,8 @@ export default function LandingPage() {
           </nav>
           <div className="flex items-center gap-4">
             <ModeToggle />
-            <Button asChild>
-              <Link href="/login">Get Started</Link>
+            <Button onClick={handleJoinWaitlist}>
+              Join waitlist
             </Button>
           </div>
         </div>
@@ -212,9 +242,10 @@ export default function LandingPage() {
 
             <div className="flex flex-col items-start md:items-center gap-6">
               <Button
+                onClick={handleJoinWaitlist}
                 className="h-12 px-8 text-base md:h-14 md:px-10 md:text-lg bg-gradient-to-br from-[#FB432C] to-[#FF591E] text-white rounded-full font-semibold shadow-[0_10px_20px_rgba(251,67,44,0.2),inset_0px_-1.5px_0px_0px_rgba(255,255,255,0.32)] hover:scale-105 transition-transform"
               >
-                Start for free
+                Join waitlist
               </Button>
 
               {/* Desktop: Want to talk text */}
@@ -234,24 +265,24 @@ export default function LandingPage() {
             {/* Mobile Version (Swapped Sources) */}
             <div className="absolute left-0 right-0 bottom-0 top-[-70%] flex md:hidden items-center justify-center pointer-events-none select-none">
               <div className="absolute left-[50%] w-[100%] h-full opacity-60 mix-blend-multiply flex items-center justify-end">
-              <Image
-                src="/figma-assets/hero-gradient-left.svg"
-                alt=""
-                width={721}
-                height={701}
-                className="w-full h-auto object-contain"
-                priority
-              />
+                <Image
+                  src="/figma-assets/hero-gradient-left.svg"
+                  alt=""
+                  width={721}
+                  height={701}
+                  className="w-full h-auto object-contain"
+                  priority
+                />
               </div>
               <div className="absolute right-[50%] w-[100%] h-full opacity-60 mix-blend-multiply flex items-center justify-start">
-              <Image
-                src="/figma-assets/hero-gradient-right.svg"
-                alt=""
-                width={721}
-                height={701}
-                className="w-full h-auto object-contain"
-                priority
-              />
+                <Image
+                  src="/figma-assets/hero-gradient-right.svg"
+                  alt=""
+                  width={721}
+                  height={701}
+                  className="w-full h-auto object-contain"
+                  priority
+                />
               </div>
             </div>
 
@@ -346,8 +377,8 @@ export default function LandingPage() {
                   </p>
                 </div>
                 <div className="flex flex-col gap-2 min-[400px]:flex-row">
-                  <Button size="lg" asChild>
-                    <Link href="/login">Start Free Trial</Link>
+                  <Button size="lg" onClick={handleJoinWaitlist}>
+                    Join waitlist
                   </Button>
                   <Button size="lg" variant="outline" asChild>
                     <Link href="#demo">Watch Demo</Link>
@@ -485,6 +516,60 @@ export default function LandingPage() {
           </div>
         </section>
 
+        {/* Integrations Section */}
+        <section className="w-full py-16 md:py-24 bg-white border-y border-gray-100">
+          <div className="container px-4 md:px-6">
+            <div className="flex flex-col items-center justify-center space-y-4 text-center mb-12">
+              <div className="inline-block rounded-full bg-purple-100 px-4 py-1.5 text-sm font-semibold text-purple-600">Integrations</div>
+              <h2 className="text-3xl font-bold tracking-tighter md:text-4xl text-gray-900">
+                Works with your favorite tools
+              </h2>
+              <p className="max-w-[700px] text-gray-500 md:text-xl/relaxed">
+                Connect Sysmos with your existing stack in seconds.
+              </p>
+            </div>
+            <div className="mx-auto grid grid-cols-2 gap-8 md:grid-cols-4 lg:grid-cols-6 items-center justify-center grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-500">
+              {/* Integration Icons (Using Lucide for simplicity) */}
+              <div className="flex flex-col items-center gap-3 group">
+                <div className="p-4 rounded-xl bg-gray-50 group-hover:bg-blue-50 transition-colors">
+                  <Cloud className="w-10 h-10 text-gray-600 group-hover:text-blue-500" />
+                </div>
+                <span className="font-medium text-gray-600">AWS</span>
+              </div>
+              <div className="flex flex-col items-center gap-3 group">
+                <div className="p-4 rounded-xl bg-gray-50 group-hover:bg-blue-50 transition-colors">
+                  <Cloud className="w-10 h-10 text-gray-600 group-hover:text-sky-500" />
+                </div>
+                <span className="font-medium text-gray-600">Azure</span>
+              </div>
+              <div className="flex flex-col items-center gap-3 group">
+                <div className="p-4 rounded-xl bg-gray-50 group-hover:bg-blue-50 transition-colors">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-10 h-10 text-gray-600 group-hover:text-blue-600"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z" /><line x1="4" y1="22" x2="4" y2="15" /></svg>
+                </div>
+                <span className="font-medium text-gray-600">Docker</span>
+              </div>
+              <div className="flex flex-col items-center gap-3 group">
+                <div className="p-4 rounded-xl bg-gray-50 group-hover:bg-orange-50 transition-colors">
+                  <Workflow className="w-10 h-10 text-gray-600 group-hover:text-orange-500" />
+                </div>
+                <span className="font-medium text-gray-600">Kubernetes</span>
+              </div>
+              <div className="flex flex-col items-center gap-3 group">
+                <div className="p-4 rounded-xl bg-gray-50 group-hover:bg-green-50 transition-colors">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-10 h-10 text-gray-600 group-hover:text-green-500"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" /><polyline points="14 2 14 8 20 8" /><path d="M16 13H8" /><path d="M16 17H8" /><path d="M10 9H8" /></svg>
+                </div>
+                <span className="font-medium text-gray-600">Terraform</span>
+              </div>
+              <div className="flex flex-col items-center gap-3 group">
+                <div className="p-4 rounded-xl bg-gray-50 group-hover:bg-purple-50 transition-colors">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-10 h-10 text-gray-600 group-hover:text-purple-500"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" /></svg>
+                </div>
+                <span className="font-medium text-gray-600">GitHub</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* How It Works Section */}
         <section id="how-it-works" className="w-full py-12 md:py-24 lg:py-32 ">
           <div className="container px-4 md:px-6">
@@ -558,49 +643,9 @@ export default function LandingPage() {
               </p>
             </div>
             <div className="mx-auto grid max-w-5xl grid-cols-1 gap-6 py-12 md:grid-cols-3">
-              <PricingCard
-                title="Starter"
-                price="$49"
-                description="Perfect for small teams and startups."
-                features={[
-                  "Up to 10 servers",
-                  "5-minute data resolution",
-                  "7-day data retention",
-                  "Email alerts",
-                  "Basic dashboards",
-                ]}
-                buttonText="Start Free Trial"
-              />
-              <PricingCard
-                title="Professional"
-                price="$99"
-                description="Ideal for growing businesses."
-                features={[
-                  "Up to 50 servers",
-                  "1-minute data resolution",
-                  "30-day data retention",
-                  "Email & Slack alerts",
-                  "Advanced dashboards",
-                  "API access",
-                ]}
-                buttonText="Start Free Trial"
-                highlighted={true}
-              />
-              <PricingCard
-                title="Enterprise"
-                price="$249"
-                description="For large organizations with complex needs."
-                features={[
-                  "Unlimited servers",
-                  "30-second data resolution",
-                  "1-year data retention",
-                  "Custom alert channels",
-                  "Custom dashboards",
-                  "Priority support",
-                  "SSO integration",
-                ]}
-                buttonText="Contact Sales"
-              />
+              <PricingSkeletonCard />
+              <PricingSkeletonCard highlighted />
+              <PricingSkeletonCard />
             </div>
           </div>
         </section>
@@ -704,10 +749,10 @@ export default function LandingPage() {
               <h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight">
                 Ready to take control of your infrastructure?
               </h2>
-              <p className="max-w-[700px] md:text-xl">Start your 14-day free trial today. No credit card required.</p>
+              <p className="max-w-[700px] md:text-xl">Join our waitlist to be notified when we launch.</p>
               <div className="flex flex-col gap-2 min-[400px]:flex-row">
-                <Button size="lg" variant="secondary" asChild>
-                  <Link href="/login">Start Free Trial</Link>
+                <Button size="lg" variant="secondary" onClick={handleJoinWaitlist}>
+                  Join waitlist
                 </Button>
                 <Button size="lg" variant="outline" asChild>
                   <Link href="#demo" className={"text-white"}>Schedule Demo</Link>
@@ -870,55 +915,157 @@ export default function LandingPage() {
           </div>
         </div>
       </footer>
+
+      {/* Waitlist Modal */}
+      <Dialog open={isWaitlistOpen} onOpenChange={setIsWaitlistOpen}>
+        <DialogContent className="sm:max-w-[425px]">
+          <DialogHeader>
+            <DialogTitle>Join the Waitlist</DialogTitle>
+            <DialogDescription>
+              Be among the first to experience Sysmos. We'll notify you when we launch.
+            </DialogDescription>
+          </DialogHeader>
+          <form onSubmit={handleSubmit}>
+            <div className="grid gap-4 py-4">
+              <div className="grid gap-2">
+                <Label htmlFor="name">Name</Label>
+                <Input
+                  id="name"
+                  placeholder="John Doe"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  required
+                />
+              </div>
+              <div className="grid gap-2">
+                <Label htmlFor="email">Email</Label>
+                <Input
+                  id="email"
+                  type="email"
+                  placeholder="john@example.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+              </div>
+            </div>
+            <DialogFooter>
+              <Button type="button" variant="outline" onClick={() => setIsWaitlistOpen(false)}>
+                Cancel
+              </Button>
+              <Button type="submit">Join Waitlist</Button>
+            </DialogFooter>
+          </form>
+        </DialogContent>
+      </Dialog>
     </div>
   )
 }
 
 function FeatureCard({ icon, title, description }) {
   return (
-    <div className="flex flex-col items-center text-center">
-      <div className="mb-4 rounded-full bg-muted p-4">{icon}</div>
-      <h3 className="mb-2 text-xl font-bold">{title}</h3>
-      <p className="text-muted-foreground">{description}</p>
+    <div className="flex flex-col items-center text-center p-6 rounded-2xl bg-white border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+      <div className="mb-4 rounded-full bg-orange-50 p-4 text-orange-600 ring-1 ring-orange-100">{icon}</div>
+      <h3 className="mb-2 text-xl font-bold text-gray-900">{title}</h3>
+      <p className="text-gray-500 leading-relaxed">{description}</p>
     </div>
   )
 }
 
 function StepCard({ number, title, description }) {
   return (
-    <div className="flex flex-col items-center text-center">
-      <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary text-primary-foreground text-2xl font-bold">
+    <div className="flex flex-col items-center text-center group">
+      <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-gray-900 to-gray-700 text-white text-2xl font-bold shadow-lg group-hover:scale-110 transition-transform duration-300">
         {number}
       </div>
-      <h3 className="mb-2 text-xl font-bold">{title}</h3>
-      <p className="text-muted-foreground">{description}</p>
+      <h3 className="mb-3 text-xl font-bold text-gray-900">{title}</h3>
+      <p className="text-gray-500 leading-relaxed max-w-sm">{description}</p>
     </div>
   )
 }
 
-function PricingCard({ title, price, description, features, buttonText, highlighted = false }) {
+function PricingCard({ title, price, description, features, buttonText, highlighted = false, onButtonClick }: { title: string; price: string; description: string; features: string[]; buttonText: string; highlighted?: boolean; onButtonClick?: () => void }) {
   return (
-    <div className={`flex flex-col rounded-lg border p-6 ${highlighted ? "border-primary shadow-lg" : ""}`}>
-      <div className="mb-4">
-        <h3 className="text-xl font-bold">{title}</h3>
-        <div className="mt-2 flex items-baseline">
-          <span className="text-3xl font-bold">{price}</span>
-          <span className="ml-1 text-muted-foreground">/month</span>
+    <div className={`relative flex flex-col rounded-2xl p-8 transition-all duration-300 ${highlighted ? "bg-gray-900 text-white shadow-2xl scale-105 z-10 ring-1 ring-gray-900 animate-breathing-highlighted" : "bg-white border border-gray-200 hover:shadow-xl hover:border-gray-300 animate-breathing"}`}>
+      {highlighted && (
+        <div className="absolute -top-4 left-1/2 -translate-x-1/2 rounded-full bg-gradient-to-r from-orange-500 to-red-500 px-4 py-1 text-sm font-semibold text-white shadow-lg">
+          Most Popular
         </div>
-        <p className="mt-2 text-sm text-muted-foreground">{description}</p>
+      )}
+      <div className="mb-6">
+        <h3 className={`text-xl font-bold ${highlighted ? "text-gray-100" : "text-gray-900"}`}>{title}</h3>
+        <div className="mt-4 flex items-baseline">
+          <span className="text-4xl font-bold tracking-tight">{price}</span>
+          <span className={`ml-2 text-sm ${highlighted ? "text-gray-400" : "text-gray-500"}`}>/month</span>
+        </div>
+        <p className={`mt-4 text-sm ${highlighted ? "text-gray-300" : "text-gray-500"}`}>{description}</p>
       </div>
-      <ul className="mb-6 flex-1 space-y-2">
+      <ul className="mb-8 flex-1 space-y-4">
         {features.map((feature, index) => (
           <li key={index} className="flex items-center">
-            <Check className="mr-2 h-4 w-4 text-primary" />
-            <span>{feature}</span>
+            <Check className={`mr-3 h-5 w-5 ${highlighted ? "text-orange-500" : "text-green-500"}`} />
+            <span className={highlighted ? "text-gray-200" : "text-gray-600"}>{feature}</span>
           </li>
         ))}
       </ul>
-      <Button className={`w-full ${highlighted ? "bg-primary text-primary-foreground" : ""}`}>{buttonText}</Button>
+      <Button
+        onClick={onButtonClick || undefined}
+        className={`w-full h-12 rounded-xl font-semibold text-base transition-all ${highlighted ? "bg-white text-gray-900 hover:bg-gray-100" : "bg-gray-900 text-white hover:bg-gray-800"}`}
+      >
+        {buttonText}
+      </Button>
     </div>
   )
 }
+
+function PricingSkeletonCard({ highlighted = false }: { highlighted?: boolean }) {
+  return (
+    <div
+      className={`relative flex flex-col rounded-2xl p-8 transition-all
+      ${highlighted
+          ? "bg-gray-900 text-white shadow-2xl scale-105 z-10 ring-1 ring-gray-900 animate-breathing-highlighted"
+          : "bg-white border border-gray-200 animate-breathing"
+        }`}
+    >
+      {highlighted && (
+        <div className="absolute -top-4 left-1/2 -translate-x-1/2 rounded-full bg-gradient-to-r from-orange-500 to-red-500 px-4 py-1 text-sm font-semibold text-white shadow-lg">
+          Coming Soon
+        </div>
+      )}
+
+      {/* Title */}
+      <div className="mb-6">
+        <div className={`h-5 w-24 rounded bg-gray-300 ${highlighted && "bg-gray-700"}`} />
+
+        {/* Price */}
+        <div className="mt-4 flex items-baseline space-x-2">
+          <div className={`h-10 w-20 rounded bg-gray-300 ${highlighted && "bg-gray-700"}`} />
+          <div className={`h-4 w-12 rounded bg-gray-200 ${highlighted && "bg-gray-600"}`} />
+        </div>
+
+        {/* Description */}
+        <div className={`mt-4 h-4 w-full rounded bg-gray-200 ${highlighted && "bg-gray-700"}`} />
+      </div>
+
+      {/* Features */}
+      <ul className="mb-8 flex-1 space-y-4">
+        {[...Array(5)].map((_, i) => (
+          <li key={i} className="flex items-center space-x-3">
+            <div className={`h-5 w-5 rounded-full bg-gray-300 ${highlighted && "bg-gray-600"}`} />
+            <div className={`h-4 w-full rounded bg-gray-200 ${highlighted && "bg-gray-700"}`} />
+          </li>
+        ))}
+      </ul>
+
+      {/* Button */}
+      <div
+        className={`h-12 w-full rounded-xl
+        ${highlighted ? "bg-gray-700" : "bg-gray-300"}`}
+      />
+    </div>
+  )
+}
+
 
 function TestimonialCard({ quote, author, role, avatar }) {
   return (
