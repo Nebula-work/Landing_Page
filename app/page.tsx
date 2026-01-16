@@ -79,181 +79,44 @@ export default function LandingPage() {
           </nav>
           <div className="flex items-center gap-4">
             <ModeToggle />
-            <Button onClick={handleJoinWaitlist}>
-              Join waitlist
+            <Button asChild>
+              <Link href="https://app.sysmos.org/" target="blank">Get Started</Link>
             </Button>
           </div>
         </div>
       </header>
 
       <main className="flex-1">
-
-
-        {/* <section className="relative w-full min-h-screen flex items-start justify-start overflow-hidden bg-white">
-          <div className="relative z-10 w-full max-w-[1440px] mx-auto px-[132px] pt-[173px] pb-0">
-            <div className="flex flex-col items-center gap-6">
-              <div className="flex flex-col items-center gap-8">
-                <div className="flex flex-col items-center gap-6 w-full max-w-[1192px]">
-                  <h1 className="text-[84px] font-semibold leading-[89px] tracking-[-3.5px] text-center text-[#171717] w-full">
-                    Create, inspect, and apply synthetic surveillance broadly.
-                  </h1>
-                  <p className="text-xl leading-[35px] text-center text-[#5F5F5F] w-full">
-                    Start with a stunning homepage. Stay motivated without hurting your pocket.
-                  </p>
-                </div>
-                <Button
-                  className="bg-gradient-to-br from-[#FB432C] to-[#FF591E] text-white rounded-full px-7 py-3 text-base font-semibold shadow-[inset_0px_-1.5px_0px_0px_rgba(255,255,255,0.32),inset_0px_0.5px_0px_0px_rgba(255,255,255,0.32)] hover:opacity-90"
-                >
-                  Start for free
-                </Button>
-              </div>
-              <div className="flex items-center gap-2 mt-6">
-                <span className="text-sm leading-[20px] text-[#A3A3A3]">Want to talk or get a live demo?</span>
-                <Link href="#" className="text-sm leading-[20px] text-[#525252] hover:underline">
-                  Get in touch →
-                </Link>
-              </div>
-            </div>
-          </div>
-          
-            <div className="absolute inset-0  overflow-hidden pointer-events-none">
-           
-            <div className="absolute left-7 top-[300px] w-[720.78px] h-[700.34px]">
-              <Image
-              src="/figma-assets/hero-gradient-right.svg"
-              alt=""
-              width={721}
-              height={701}
-              className="w-full h-full object-cover"
-              priority
-              />
-            </div>
-         
-            <div className="absolute right-7 top-[300px] w-[720.78px] h-[700.34px]">
-              <Image
-              src="/figma-assets/hero-gradient-left.svg"
-              alt=""
-              width={721}
-              height={701}
-              className="w-full h-full object-cover"
-              priority
-              />
-            </div>
-            </div>
-
-          
-            <div className="absolute inset-0 pointer-events-none transform translate-y-[150px]">
-            
-            <div className="absolute left-[152px] top-[325px] w-[88px] h-[88px]">
-              <Image
-              src="/figma-assets/floating-image-1.png"
-              alt=""
-              width={88}
-              height={88}
-              className="w-full h-full object-cover rounded-full"
-              />
-            </div>
-           
-            <div className="absolute left-[942px] top-[561px] w-[88px] h-[72px]">
-              <Image
-              src="/figma-assets/floating-image-2.png"
-              alt=""
-              width={88}
-              height={72}
-              className="w-full h-full object-cover rounded-full"
-              />
-            </div>
-            
-            <div className="absolute left-[296px] top-[485px] w-[88px] h-[88px]">
-              <Image
-              src="/figma-assets/floating-image-3.png"
-              alt=""
-              width={88}
-              height={88}
-              className="w-full h-full object-cover rounded-full"
-              />
-            </div>
-           
-            <div className="absolute left-[108px] top-[615px] w-[88px] h-[88px]">
-              <Image
-              src="/figma-assets/floating-image-4.png"
-              alt=""
-              width={88}
-              height={88}
-              className="w-full h-full object-cover rounded-full"
-              />
-            </div>
-            
-            <div className="absolute left-[1100px] top-[586px] w-[88px] h-[88px]">
-              <Image
-              src="/figma-assets/floating-image-5.png"
-              alt=""
-              width={88}
-              height={88}
-              className="w-full h-full object-cover rounded-full"
-              />
-            </div>
-         
-            <div className="absolute left-[1180px] top-[400px] w-[88px] h-[88px]">
-              <Image
-              src="/figma-assets/floating-image-6.png"
-              alt=""
-              width={88}
-              height={88}
-              className="w-full h-full object-cover rounded-full"
-              />
-            </div>
-            </div>
-
-          
-          <div className="absolute left-1/2 top-[700px] transform -translate-x-1/2 z-10 pointer-events-auto cursor-pointer">
-            <div className="w-[94px] h-[93px] bg-gradient-to-br from-[#FB432C] to-[#FF591E] rounded-[24px] p-2 flex items-center justify-center shadow-lg hover:scale-105 transition-transform">
-              <div className="w-[60px] h-[60px] bg-white rounded-full flex items-center justify-center">
-                <Image
-                  src="/figma-assets/play-button.svg"
-                  alt="Play"
-                  width={60}
-                  height={60}
-                  className="ml-1"
-                />
-              </div>
-            </div>
-          </div>
-
-          
-
-        </section> */}
-
         {/* Hero Section */}
-        <section className="relative w-full min-h-[auto] md:min-h-[90vh] flex flex-col items-center justify-start overflow-hidden bg-white selection:bg-orange-100 pt-16 md:pt-20 lg:pt-28 pb-12 md:pb-0">
+        <section className="relative w-full min-h-[auto] md:min-h-[90vh] flex flex-col items-center justify-start overflow-hidden bg-white dark:bg-background selection:bg-orange-100 dark:selection:bg-orange-700 pt-16 md:pt-20 lg:pt-28 pb-12 md:pb-0">
 
           {/* 1. Main Text Content & CTA */}
           <div className="relative z-10 w-full max-w-5xl px-4 md:px-6 flex flex-col items-start md:items-center gap-6 md:gap-8 mb-4">
             <div className="space-y-6 text-left md:text-center lg:w-full">
-              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-5xl font-bold leading-[1.1] tracking-tight text-[#171717] w-full md:max-w-[90%] md:mx-auto">
-                Real-time server monitoring that prevents downtime
-                <br className="hidden md:block" />
-                and keeps your infrastructure reliable at scale.
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-5xl font-bold leading-[1.1] tracking-tight text-[#171717] dark:text-white w-full md:max-w-[90%] md:mx-auto">
+          Real-time server monitoring that prevents downtime
+          <br className="hidden md:block" />
+          and keeps your infrastructure reliable at scale.
               </h1>
-              <p className="text-lg sm:text-xl md:text-2xl leading-relaxed text-[#5F5F5F] max-w-2xl mx-0 md:mx-auto">
-                Gain full visibility into your servers, logs, and metrics. Prevent downtime before it impacts your users.
+              <p className="text-lg sm:text-xl md:text-2xl leading-relaxed text-[#5F5F5F] dark:text-gray-300 max-w-2xl mx-0 md:mx-auto">
+          Gain full visibility into your servers, logs, and metrics. Prevent downtime before it impacts your users.
               </p>
             </div>
 
             <div className="flex flex-col items-start md:items-center gap-6">
               <Button
-                onClick={handleJoinWaitlist}
-                className="h-12 px-8 text-base md:h-14 md:px-10 md:text-lg bg-gradient-to-br from-[#FB432C] to-[#FF591E] text-white rounded-full font-semibold shadow-[0_10px_20px_rgba(251,67,44,0.2),inset_0px_-1.5px_0px_0px_rgba(255,255,255,0.32)] hover:scale-105 transition-transform"
+          onClick={handleJoinWaitlist}
+          className="h-12 px-8 text-base md:h-14 md:px-10 md:text-lg bg-gradient-to-br from-[#FB432C] to-[#FF591E] text-white rounded-full font-semibold shadow-[0_10px_20px_rgba(251,67,44,0.2),inset_0px_-1.5px_0px_0px_rgba(255,255,255,0.32)] dark:shadow-[0_10px_24px_rgba(0,0,0,0.6)] hover:scale-105 transition-transform"
               >
-                Join waitlist
+          Join waitlist
               </Button>
 
               {/* Desktop: Want to talk text */}
               <div className="hidden md:flex items-center gap-2">
-                <span className="text-sm text-[#A3A3A3]">Want to talk or get a live demo?</span>
-                <Link href="#" className="text-sm font-medium text-[#525252] hover:text-[#FB432C] transition-colors flex items-center gap-1">
-                  Get in touch <span>→</span>
-                </Link>
+          <span className="text-sm text-[#A3A3A3] dark:text-gray-400">Want to talk or get a live demo?</span>
+          <Link href="#" className="text-sm font-medium text-[#525252] dark:text-gray-200 hover:text-[#FB432C] transition-colors flex items-center gap-1">
+            Get in touch <span>→</span>
+          </Link>
               </div>
             </div>
           </div>
@@ -262,7 +125,7 @@ export default function LandingPage() {
           <div className="relative w-full max-w-[1440px] flex items-center justify-center mt-6 md:mt-12">
 
             {/* Background Gradients - Centered in this wrapper */}
-            {/* Mobile Version (Swapped Sources) */}
+            {/* Mobile Version (Theme-aware) */}
             <div className="absolute left-0 right-0 bottom-0 top-[-70%] flex md:hidden items-center justify-center pointer-events-none select-none">
               <div className="absolute left-[50%] w-[100%] h-full opacity-60 mix-blend-multiply flex items-center justify-end">
                 <Image
@@ -270,7 +133,15 @@ export default function LandingPage() {
                   alt=""
                   width={721}
                   height={701}
-                  className="w-full h-auto object-contain"
+                  className="w-full h-auto object-contain dark:hidden"
+                  priority
+                />
+                <Image
+                  src="/figma-assets/hero-gradient-left-light.svg"
+                  alt=""
+                  width={721}
+                  height={701}
+                  className="w-full h-auto object-contain hidden dark:block"
                   priority
                 />
               </div>
@@ -280,31 +151,55 @@ export default function LandingPage() {
                   alt=""
                   width={721}
                   height={701}
-                  className="w-full h-auto object-contain"
+                  className="w-full h-auto object-contain dark:hidden"
+                  priority
+                />
+                <Image
+                  src="/figma-assets/hero-gradient-right-light.svg"
+                  alt=""
+                  width={721}
+                  height={701}
+                  className="w-full h-auto object-contain hidden dark:block"
                   priority
                 />
               </div>
             </div>
 
-            {/* Desktop Version (Original Sources) */}
+            {/* Desktop Version (Theme-aware) */}
             <div className="absolute inset-0 hidden md:flex items-center justify-center pointer-events-none select-none">
-              <div className="absolute left-[-10%] w-[60%] h-full opacity-60 mix-blend-multiply flex items-center justify-end">
+              <div className="absolute left-[-10%] w-[60%] h-full opacity-60 mix-blend-normal flex items-center justify-end">
                 <Image
                   src="/figma-assets/hero-gradient-right.svg"
                   alt=""
                   width={721}
                   height={701}
-                  className="w-full h-auto object-contain md:translate-y-[-10%]"
+                  className="w-full h-auto object-contain md:translate-y-[-10%] dark:hidden"
+                  priority
+                />
+                <Image
+                  src="/figma-assets/hero-gradient-left-light.svg"
+                  alt=""
+                  width={721}
+                  height={701}
+                  className="w-full h-auto object-contain md:translate-y-[-10%] hidden dark:block"
                   priority
                 />
               </div>
-              <div className="absolute right-[-10%] w-[60%] h-full opacity-60 mix-blend-multiply flex items-center justify-start">
+              <div className="absolute right-[-10%] w-[60%] h-full opacity-60 mix-blend-normal flex items-center justify-start">
                 <Image
                   src="/figma-assets/hero-gradient-left.svg"
                   alt=""
                   width={721}
                   height={701}
-                  className="w-full h-auto object-contain md:translate-y-[-10%]"
+                  className="w-full h-auto object-contain md:translate-y-[-10%] dark:hidden"
+                  priority
+                />
+                <Image
+                  src="/figma-assets/hero-gradient-right-light.svg"
+                  alt=""
+                  width={721}
+                  height={701}
+                  className="w-full h-auto object-contain md:translate-y-[-10%] hidden dark:block"
                   priority
                 />
               </div>
@@ -314,48 +209,48 @@ export default function LandingPage() {
             <div className="absolute inset-0 pointer-events-none">
               {/* Left Group */}
               <div className="absolute left-[5%] top-[20%] md:left-[10%] md:top-[10%] animate-bounce [animation-duration:3s]">
-                <Image src="/figma-assets/floating-image-1.png" alt="" width={88} height={88} className="w-[32px] h-[32px] md:w-[64px] md:h-[64px] lg:w-[88px] lg:h-[88px]" />
+          <Image src="/figma-assets/floating-image-1.png" alt="" width={88} height={88} className="w-[32px] h-[32px] md:w-[64px] md:h-[64px] lg:w-[88px] lg:h-[88px] filter dark:brightness-90" />
               </div>
               <div className="absolute left-[15%] top-[50%] md:left-[20%] md:top-[45%] animate-bounce [animation-duration:4s]">
-                <Image src="/figma-assets/floating-image-3.png" alt="" width={88} height={88} className="w-[32px] h-[32px] md:w-[64px] md:h-[64px] lg:w-[88px] lg:h-[88px]" />
+          <Image src="/figma-assets/floating-image-3.png" alt="" width={88} height={88} className="w-[32px] h-[32px] md:w-[64px] md:h-[64px] lg:w-[88px] lg:h-[88px] filter dark:brightness-90" />
               </div>
               <div className="absolute left-[0%] top-[70%] md:left-[8%] md:top-[75%] animate-bounce [animation-duration:5s]">
-                <Image src="/figma-assets/floating-image-4.png" alt="" width={88} height={88} className="w-[32px] h-[32px] md:w-[64px] md:h-[64px] lg:w-[88px] lg:h-[88px]" />
+          <Image src="/figma-assets/floating-image-4.png" alt="" width={88} height={88} className="w-[32px] h-[32px] md:w-[64px] md:h-[64px] lg:w-[88px] lg:h-[88px] filter dark:brightness-90" />
               </div>
 
               {/* Right Group */}
               <div className="absolute right-[5%] top-[25%] md:right-[15%] md:top-[10%] animate-bounce [animation-duration:3.5s]">
-                <Image src="/figma-assets/floating-image-6.png" alt="" width={88} height={88} className="w-[32px] h-[32px] md:w-[64px] md:h-[64px] lg:w-[88px] lg:h-[88px]" />
+          <Image src="/figma-assets/floating-image-6.png" alt="" width={88} height={88} className="w-[32px] h-[32px] md:w-[64px] md:h-[64px] lg:w-[88px] lg:h-[88px] filter dark:brightness-90" />
               </div>
               <div className="absolute right-[15%] top-[55%] md:right-[22%] md:top-[50%] animate-bounce [animation-duration:4.5s]">
-                <Image src="/figma-assets/floating-image-2.png" alt="" width={88} height={72} className="w-[32px] h-[26px] md:w-[64px] md:h-[50px] lg:w-[88px] lg:h-[72px]" />
+          <Image src="/figma-assets/floating-image-2.png" alt="" width={88} height={72} className="w-[32px] h-[26px] md:w-[64px] md:h-[50px] lg:w-[88px] lg:h-[72px] filter dark:brightness-90" />
               </div>
               <div className="absolute right-[2%] top-[80%] md:right-[10%] md:top-[75%] animate-bounce [animation-duration:5.5s]">
-                <Image src="/figma-assets/floating-image-5.png" alt="" width={88} height={88} className="w-[32px] h-[32px] md:w-[64px] md:h-[64px] lg:w-[88px] lg:h-[88px]" />
+          <Image src="/figma-assets/floating-image-5.png" alt="" width={88} height={88} className="w-[32px] h-[32px] md:w-[64px] md:h-[64px] lg:w-[88px] lg:h-[88px] filter dark:brightness-90" />
               </div>
             </div>
 
             {/* Play Button - The Visual Center */}
             <div className="relative z-20 py-8 md:py-24 lg:py-2">
               <button className="group relative w-16 h-16 md:w-20 md:h-20 lg:w-[94px] lg:h-[93px] translate-y-3 lg:translate-y-[45px] bg-gradient-to-br from-[#FB432C] to-[#FF591E] rounded-[20px] md:rounded-[24px] flex items-center justify-center shadow-2xl hover:scale-110 transition-all active:scale-95">
-                <div className="w-10 h-10 md:w-14 md:h-14 lg:w-[60px] lg:h-[60px] bg-white rounded-full flex items-center justify-center shadow-inner group-hover:bg-gray-50 transition-colors">
-                  <Image
-                    src="/figma-assets/play-button.svg"
-                    alt="Play"
-                    width={24}
-                    height={24}
-                    className="w-4 h-4 md:w-6 md:h-6 lg:w-[24px] lg:h-[24px] ml-1"
-                  />
-                </div>
-                <span className="absolute inset-0 rounded-[24px] bg-orange-500/20 animate-ping -z-10 group-hover:animate-none" />
+          <div className="w-10 h-10 md:w-14 md:h-14 lg:w-[60px] lg:h-[60px] bg-white dark:bg-slate-800 rounded-full flex items-center justify-center shadow-inner group-hover:bg-gray-50 dark:group-hover:bg-slate-700 transition-colors">
+            <Image
+              src="/figma-assets/play-button.svg"
+              alt="Play"
+              width={24}
+              height={24}
+              className="w-4 h-4 md:w-6 md:h-6 lg:w-[24px] lg:h-[24px] ml-1"
+            />
+          </div>
+          <span className="absolute inset-0 rounded-[24px] bg-orange-500/20 animate-ping -z-10 group-hover:animate-none dark:bg-orange-600/15" />
               </button>
             </div>
           </div>
 
           {/* Mobile: Want to talk text (Positioned at bottom) */}
           <div className="flex md:hidden items-center gap-2 mt-4 relative z-20">
-            <span className="text-sm text-[#A3A3A3]">Want to talk or get a live demo?</span>
-            <Link href="#" className="text-sm font-medium text-[#525252] hover:text-[#FB432C] transition-colors flex items-center gap-1">
+            <span className="text-sm text-[#A3A3A3] dark:text-gray-400">Want to talk or get a live demo?</span>
+            <Link href="#" className="text-sm font-medium text-[#525252] dark:text-gray-200 hover:text-[#FB432C] transition-colors flex items-center gap-1">
               Get in touch <span>→</span>
             </Link>
           </div>
