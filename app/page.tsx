@@ -412,54 +412,74 @@ export default function LandingPage() {
         </section>
 
         {/* Integrations Section */}
-        <section className="w-full py-16 md:py-24 bg-white border-y border-gray-100">
+        <section className="w-full py-16 md:py-24">
           <div className="container px-4 md:px-6">
             <div className="flex flex-col items-center justify-center space-y-4 text-center mb-12">
-              <div className="inline-block rounded-full bg-purple-100 px-4 py-1.5 text-sm font-semibold text-purple-600">Integrations</div>
-              <h2 className="text-3xl font-bold tracking-tighter md:text-4xl text-gray-900">
-                Works with your favorite tools
+              <div className="inline-block rounded-full bg-purple-100 dark:bg-purple-900/40 px-4 py-1.5 text-sm font-semibold text-purple-600 dark:text-purple-300">
+                Integrations
+              </div>
+              <h2 className="text-3xl font-bold tracking-tighter md:text-4xl text-foreground">
+                Works with your favorite tools — and yours too
               </h2>
-              <p className="max-w-[700px] text-gray-500 md:text-xl/relaxed">
-                Connect Sysmos with your existing stack in seconds.
+              <p className="max-w-[700px] text-muted-foreground md:text-xl">
+                Connect Sysmos with your existing stack in seconds. Cloud, container, orchestration, or on‑premise.
               </p>
             </div>
-            <div className="mx-auto grid grid-cols-2 gap-8 md:grid-cols-4 lg:grid-cols-6 items-center justify-center grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-500">
-              {/* Integration Icons (Using Lucide for simplicity) */}
+
+            <div className="mx-auto grid grid-cols-2 gap-6 md:grid-cols-4 lg:grid-cols-6 items-center justify-center">
+              {/* Card helper */}
               <div className="flex flex-col items-center gap-3 group">
-                <div className="p-4 rounded-xl bg-gray-50 group-hover:bg-blue-50 transition-colors">
-                  <Cloud className="w-10 h-10 text-gray-600 group-hover:text-blue-500" />
+                <div className="p-4 rounded-xl bg-card border border-border shadow-sm group-hover:shadow-lg transition-all duration-200">
+                  <Cloud className="w-10 h-10 text-muted-foreground group-hover:text-blue-500 dark:group-hover:text-sky-400 transition-colors" />
                 </div>
-                <span className="font-medium text-gray-600">AWS</span>
+                <span className="font-medium text-foreground">AWS</span>
               </div>
+
               <div className="flex flex-col items-center gap-3 group">
-                <div className="p-4 rounded-xl bg-gray-50 group-hover:bg-blue-50 transition-colors">
-                  <Cloud className="w-10 h-10 text-gray-600 group-hover:text-sky-500" />
+                <div className="p-4 rounded-xl bg-card border border-border shadow-sm group-hover:shadow-lg transition-all duration-200">
+                  <Cloud className="w-10 h-10 text-muted-foreground group-hover:text-sky-500 dark:group-hover:text-sky-400 transition-colors" />
                 </div>
-                <span className="font-medium text-gray-600">Azure</span>
+                <span className="font-medium text-foreground">Azure</span>
               </div>
+
               <div className="flex flex-col items-center gap-3 group">
-                <div className="p-4 rounded-xl bg-gray-50 group-hover:bg-blue-50 transition-colors">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-10 h-10 text-gray-600 group-hover:text-blue-600"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z" /><line x1="4" y1="22" x2="4" y2="15" /></svg>
+                <div className="p-4 rounded-xl bg-card border border-border shadow-sm group-hover:shadow-lg transition-all duration-200">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-10 h-10 text-muted-foreground group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                    <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z" />
+                    <line x1="4" y1="22" x2="4" y2="15" />
+                  </svg>
                 </div>
-                <span className="font-medium text-gray-600">Docker</span>
+                <span className="font-medium text-foreground">Docker</span>
               </div>
+
               <div className="flex flex-col items-center gap-3 group">
-                <div className="p-4 rounded-xl bg-gray-50 group-hover:bg-orange-50 transition-colors">
-                  <Workflow className="w-10 h-10 text-gray-600 group-hover:text-orange-500" />
+                <div className="p-4 rounded-xl bg-card border border-border shadow-sm group-hover:shadow-lg transition-all duration-200">
+                  <Workflow className="w-10 h-10 text-muted-foreground group-hover:text-orange-500 dark:group-hover:text-orange-400 transition-colors" />
                 </div>
-                <span className="font-medium text-gray-600">Kubernetes</span>
+                <span className="font-medium text-foreground">Kubernetes</span>
               </div>
+
+              {/* Enhanced On‑Premise card replaces Terraform */}
               <div className="flex flex-col items-center gap-3 group">
-                <div className="p-4 rounded-xl bg-gray-50 group-hover:bg-green-50 transition-colors">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-10 h-10 text-gray-600 group-hover:text-green-500"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" /><polyline points="14 2 14 8 20 8" /><path d="M16 13H8" /><path d="M16 17H8" /><path d="M10 9H8" /></svg>
+                <div className="p-4 rounded-xl bg-card border border-border shadow-sm group-hover:shadow-lg transition-all duration-200">
+                  <Server className="w-10 h-10 text-muted-foreground group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors" />
                 </div>
-                <span className="font-medium text-gray-600">Terraform</span>
+                <div className="text-center">
+                  <div className="font-medium text-foreground">On‑Premise</div>
+                  <div className="text-xs text-muted-foreground">Agent & air‑gapped support</div>
+                </div>
               </div>
+
+              {/* Extra integration slot for future items */}
               <div className="flex flex-col items-center gap-3 group">
-                <div className="p-4 rounded-xl bg-gray-50 group-hover:bg-purple-50 transition-colors">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-10 h-10 text-gray-600 group-hover:text-purple-500"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" /></svg>
+                <div className="p-4 rounded-xl bg-card border border-border shadow-sm group-hover:shadow-lg transition-all duration-200">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-10 h-10 text-muted-foreground group-hover:text-purple-500 dark:group-hover:text-purple-400 transition-colors">
+                    <path d="M9 19c-5 1.5-5-2.5-7-3" />
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                    <path d="M20 21v-2.87" />
+                  </svg>
                 </div>
-                <span className="font-medium text-gray-600">GitHub</span>
+                <span className="font-medium text-foreground">More</span>
               </div>
             </div>
           </div>
@@ -638,19 +658,19 @@ export default function LandingPage() {
         </section>
 
         {/* CTA Section */}
-        <section className="w-full py-12 md:py-24 lg:py-32 bg-primary text-primary-foreground">
+        <section className="w-full py-12 md:py-24 lg:py-32 rounded-lg shadow-md lg:m-4 bg-gray-500">
           <div className="container px-4 md:px-6">
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
-              <h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight">
+              <h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight text-white dark:text-gray-900">
                 Ready to take control of your infrastructure?
               </h2>
-              <p className="max-w-[700px] md:text-xl">Join our waitlist to be notified when we launch.</p>
+              <p className="max-w-[700px] md:text-xl text-gray-300 dark:text-gray-600">Join our waitlist to be notified when we launch.</p>
               <div className="flex flex-col gap-2 min-[400px]:flex-row">
-                <Button size="lg" variant="secondary" onClick={handleJoinWaitlist}>
+                <Button size="lg" className="bg-white text-gray-900 hover:bg-gray-100 dark:bg-gray-900 dark:text-white dark:hover:bg-gray-800" onClick={handleJoinWaitlist}>
                   Join waitlist
                 </Button>
-                <Button size="lg" variant="outline" asChild>
-                  <Link href="#demo" className={"text-white"}>Schedule Demo</Link>
+                <Button size="lg" variant="outline" className="border-white  text-white bg-white/10 dark:border-gray-900 dark:text-gray-900 dark:hover:bg-gray-900/10" asChild>
+                  <Link href="#demo">Schedule Demo</Link>
                 </Button>
               </div>
             </div>
@@ -715,10 +735,10 @@ export default function LandingPage() {
             </div>
             <div className="flex flex-col gap-2">
               <div className="font-medium">Legal</div>
-              <Link href="#" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
+              <Link href="/privacy" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
                 Privacy Policy
               </Link>
-              <Link href="#" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
+              <Link href="/terms" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
                 Terms of Service
               </Link>
               <Link href="#" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
