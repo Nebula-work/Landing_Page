@@ -206,9 +206,9 @@ export default function PrivacyPolicy() {
               <p className="text-muted-foreground leading-relaxed">
                 If you have questions or concerns about this Privacy Policy or our data practices, please contact us at:
               </p>
-              <div className="text-muted-foreground mt-2">
-                <p>Email: privacy@sysmos.org</p>
-                <p>Support: support@sysmos.org</p>
+              <div className="text-muted-foreground mt-2 flex flex-row gap-2">
+                <p>Email:</p>
+                <a href="mailto:contact@sysmos.org" className="text-blue-600"> contact@sysmos.org</a>
               </div>
             </section>
           </div>

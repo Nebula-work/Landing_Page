@@ -292,9 +292,9 @@ export default function TermsOfService() {
               <p className="text-muted-foreground leading-relaxed">
                 For questions about these Terms of Service, please contact us:
               </p>
-              <div className="text-muted-foreground mt-2">
-                <p>Email: legal@sysmos.org</p>
-                <p>Support: support@sysmos.org</p>
+              <div className="text-muted-foreground mt-2 flex flex-row gap-2">
+                <p>Email:</p>
+                <a href="mailto:contact@sysmos.org" className="text-blue-600"> contact@sysmos.org</a>
               </div>
             </section>
           </div>
