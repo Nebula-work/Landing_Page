@@ -8,17 +8,21 @@ import { ModeToggle } from "@/components/mode-toggle"
 export default function PrivacyPolicy() {
   return (
     <div className="flex min-h-screen flex-col bg-background">
-      <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="mx-auto w-full max-w-7xl flex h-16 items-center justify-between px-4">
-          <Link href="/" className="flex items-center gap-2 font-bold text-xl">
-            <Server className="h-6 w-6" />
+      <header className="sticky top-0 z-50 border-b border-border/50 bg-background/90 backdrop-blur-xl h-14 flex items-center px-6 gap-4">
+      <Link href="/" className="flex items-center gap-2 font-bold text-base">
+        <Server className="h-6 w-6" />
             <span>Sysmos</span>
+      </Link>
+      <div className="ml-auto">
+        <Button size="sm" variant="outline" asChild>
+          <Link href="/">
+            <ArrowLeft size={14} className="mr-1" /> Back
           </Link>
-          <ModeToggle />
-        </div>
-      </header>
+        </Button>
+      </div>
+    </header>
 
-      <main className="flex-1 py-12 md:py-16">
+      <main className="mx-auto max-w-3xl px-6 py-16">
         <div className="container max-w-4xl px-4 md:px-6">
           <Button variant="ghost" asChild className="mb-8">
             <Link href="/" className="flex items-center gap-2">
