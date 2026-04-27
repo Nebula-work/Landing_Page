@@ -5,28 +5,31 @@ import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { Toaster } from "@/components/ui/sonner"
 
-
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Sysmos – Real-time Server Monitoring & Infrastructure Observability",
+  title: "Sysmos — API Monitoring, Flow Automation & Server Observability",
   description:
-    "Sysmos provides real-time server monitoring, alerts, logs, and metrics to prevent downtime and keep your infrastructure reliable at scale.",
+    "Distributed API monitoring from multiple regions, visual API flow builder for workflow automation, and eBPF-powered server observability agent — all in one platform.",
   keywords: [
+    "api monitoring",
+    "api flow builder",
+    "workflow automation",
     "server monitoring",
-    "infrastructure monitoring",
-    "devops monitoring",
-    "real time monitoring",
-    "cloud monitoring",
-    "on-prem monitoring",
+    "ebpf monitoring",
+    "infrastructure observability",
+    "ssl monitoring",
+    "uptime monitoring",
+    "server agent",
+    "devops",
     "sysmos",
   ],
   authors: [{ name: "Sysmos" }],
   creator: "Sysmos",
   openGraph: {
-    title: "Sysmos – Prevent Downtime with Real-Time Monitoring",
+    title: "Sysmos — API Monitoring, Flow Automation & Server Observability",
     description:
-      "Gain full visibility into your servers, logs, and metrics. Detect issues before they impact users.",
+      "Monitor APIs from multiple regions, automate API workflows visually, and observe server infrastructure with eBPF — unified in one platform.",
     url: "https://sysmos.org",
     siteName: "Sysmos",
     images: [
@@ -34,7 +37,7 @@ export const metadata: Metadata = {
         url: "https://sysmos.org/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Sysmos Dashboard Preview",
+        alt: "Sysmos Platform Preview",
       },
     ],
     locale: "en_US",
@@ -42,9 +45,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Sysmos – Real-Time Infrastructure Monitoring",
+    title: "Sysmos — API Monitoring, Flow Automation & Server Observability",
     description:
-      "Prevent downtime and monitor servers, metrics, and logs in real time.",
+      "Distributed API monitoring, visual flow builder, and eBPF server agent — one platform for full observability.",
     images: ["https://sysmos.org/og-image.png"],
   },
   robots: {
@@ -70,9 +73,9 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
           {children}
           <Toaster />
         </ThemeProvider>
@@ -80,6 +83,3 @@ export default function RootLayout({
     </html>
   )
 }
-
-
-

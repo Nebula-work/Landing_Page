@@ -1,11 +1,29 @@
-import { Clock, Eye, TrendingUp, Shield } from "lucide-react";
+"use client";
+
+import { Clock, Eye, Workflow, Cpu } from "lucide-react";
 import { motion } from "framer-motion";
 
 const reasons = [
-  { icon: Clock, title: "Instant Detection", desc: "Catch issues in seconds, not minutes. Multi-region checks ensure no blind spots." },
-  { icon: Eye, title: "Complete Visibility", desc: "One dashboard for uptime, latency, SSL, and incidents across every endpoint." },
-  { icon: TrendingUp, title: "Performance Insights", desc: "Track response time trends and spot regressions before they impact users." },
-  { icon: Shield, title: "Zero Surprises", desc: "SSL expiry alerts, scheduled maintenance windows, and proactive health checks." },
+  {
+    icon: Clock,
+    title: "Catch outages in seconds",
+    desc: "Multi-region health checks detect failures the moment they happen — not when your users start complaining.",
+  },
+  {
+    icon: Eye,
+    title: "One dashboard for everything",
+    desc: "APIs, server metrics, SSL certs, and workflow results in a single view. No more switching between five tools.",
+  },
+  {
+    icon: Workflow,
+    title: "Test APIs without writing scripts",
+    desc: "Build multi-step API tests visually. Chain requests, add conditions, and run them on a schedule — no code required.",
+  },
+  {
+    icon: Cpu,
+    title: "See inside your servers",
+    desc: "eBPF-powered agent monitors CPU, memory, HTTP traffic, and database queries at the kernel level — without touching your code.",
+  },
 ];
 
 const ProblemSection = () => (
@@ -18,8 +36,8 @@ const ProblemSection = () => (
           viewport={{ once: true }}
           className="text-3xl sm:text-4xl font-bold tracking-tight"
         >
-          Why teams switch to{" "}
-          <span className="text-gradient">Uptime</span>
+          Why teams choose{" "}
+          <span className="text-gradient">Sysmos</span>
         </motion.h2>
         <motion.p
           initial={{ opacity: 0, y: 10 }}
@@ -28,7 +46,7 @@ const ProblemSection = () => (
           transition={{ delay: 0.1 }}
           className="mt-4 text-muted-foreground text-lg"
         >
-          Know when your API breaks. Before your users do.
+          Three products that replace a patchwork of expensive, disconnected tools.
         </motion.p>
       </div>
 

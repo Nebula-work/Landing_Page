@@ -1,13 +1,16 @@
+"use client";
+
 import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import DashboardMockup from "@/components/landing/DashboardMockup";
 import GlobeNetwork from "@/components/landing/GlobeNetwork";
 import { motion } from "framer-motion";
 
 const stats = [
-  { value: "99.99%", label: "Uptime SLA" },
-  { value: "12M+", label: "Checks / day" },
-  { value: "<50ms", label: "Avg latency" },
+  { value: "4 Regions", label: "Global monitoring" },
+  { value: "6+", label: "Alert channels" },
+  { value: "<60s", label: "Check intervals" },
 ];
 
 const HeroSection = () => (
@@ -26,7 +29,7 @@ const HeroSection = () => (
           className="inline-flex items-center gap-2 rounded-full border border-border bg-secondary/50 px-4 py-1.5 text-xs text-muted-foreground mb-6"
         >
           <span className="h-1.5 w-1.5 rounded-full animate-pulse-glow" style={{ background: "hsl(142 69% 58%)" }} />
-          Now monitoring 12M+ endpoints worldwide
+          Free during beta — no credit card required
         </motion.div>
 
         <motion.h1
@@ -35,9 +38,9 @@ const HeroSection = () => (
           transition={{ duration: 0.5, delay: 0.1 }}
           className="text-4xl sm:text-5xl lg:text-7xl font-extrabold tracking-tight leading-[1.05]"
         >
-          Distributed API Monitoring
+          Stop debugging outages.
           <br />
-          <span className="text-gradient">for Modern Teams</span>
+          <span className="text-gradient">Start preventing them.</span>
         </motion.h1>
 
         <motion.p
@@ -46,8 +49,9 @@ const HeroSection = () => (
           transition={{ duration: 0.5, delay: 0.2 }}
           className="mt-6 text-lg text-muted-foreground max-w-xl mx-auto leading-relaxed"
         >
-          Monitor your APIs from multiple regions. Get real-time alerts.
-          Track performance. Stay reliable.
+          Sysmos combines multi-region API monitoring, visual workflow automation,
+          and kernel-level server observability — so your team catches issues before
+          users notice.
         </motion.p>
 
         <motion.div
@@ -56,15 +60,26 @@ const HeroSection = () => (
           transition={{ duration: 0.5, delay: 0.3 }}
           className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3"
         >
-          <Button size="lg" className="gap-2 font-semibold px-6">
-            Start Free <ArrowRight size={16} />
+          <Button size="lg" className="gap-2 font-semibold px-6" asChild>
+            <Link href="https://app.sysmos.org/">
+              Start Monitoring — Free <ArrowRight size={16} />
+            </Link>
           </Button>
-          <Button variant="outline" size="lg" className="font-semibold px-6">
-            View Demo
+          <Button variant="outline" size="lg" className="font-semibold px-6" asChild>
+            <Link href="#product">See How It Works</Link>
           </Button>
         </motion.div>
 
-        {/* Animated stats */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.45 }}
+          className="mt-3 text-xs text-muted-foreground"
+        >
+          Free for all users during beta. No credit card. No usage limits.
+        </motion.p>
+
+        {/* Stats */}
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}

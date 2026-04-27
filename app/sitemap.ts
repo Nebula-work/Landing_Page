@@ -9,22 +9,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
             priority: 1,
         },
         {
-            url: 'https://sysmos.org/#features',
+            url: 'https://sysmos.org/privacy',
             lastModified: new Date(),
             changeFrequency: 'monthly',
-            priority: 0.8,
+            priority: 0.3,
         },
         {
-            url: 'https://sysmos.org/#pricing',
+            url: 'https://sysmos.org/terms',
             lastModified: new Date(),
             changeFrequency: 'monthly',
-            priority: 0.8,
-        },
-        {
-            url: 'https://sysmos.org/#faq',
-            lastModified: new Date(),
-            changeFrequency: 'monthly',
-            priority: 0.5,
+            priority: 0.3,
         },
     ]
 }

@@ -1,13 +1,17 @@
+"use client";
+
 import { useState } from "react";
+import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 
 const navLinks = [
+  { label: "Platform", href: "#product" },
+  { label: "Screenshots", href: "#showcase" },
   { label: "Features", href: "#features" },
-  { label: "How It Works", href: "#how-it-works" },
-  { label: "Pricing", href: "#pricing" },
-  { label: "Docs", href: "#" },
+  { label: "Compare", href: "#comparison" },
+  { label: "FAQ", href: "#faq" },
 ];
 
 const Navbar = () => {
@@ -36,10 +40,12 @@ const Navbar = () => {
           ))}
         </div>
         <div className="hidden md:flex items-center gap-3">
-          <Button variant="ghost" size="sm" className="text-muted-foreground">
-            Log in
+          <Button variant="ghost" size="sm" className="text-muted-foreground" asChild>
+            <Link href="https://app.sysmos.org/">Log in</Link>
           </Button>
-          <Button size="sm">Start Free</Button>
+          <Button size="sm" asChild>
+            <Link href="https://app.sysmos.org/">Start Free</Link>
+          </Button>
         </div>
 
         {/* Mobile toggle */}
@@ -71,10 +77,12 @@ const Navbar = () => {
                 </a>
               ))}
               <div className="flex gap-3 pt-2">
-                <Button variant="ghost" size="sm" className="text-muted-foreground">
-                  Log in
+                <Button variant="ghost" size="sm" className="text-muted-foreground" asChild>
+                  <Link href="https://app.sysmos.org/">Log in</Link>
                 </Button>
-                <Button size="sm">Start Free</Button>
+                <Button size="sm" asChild>
+                  <Link href="https://app.sysmos.org/">Start Free</Link>
+                </Button>
               </div>
             </div>
           </motion.div>

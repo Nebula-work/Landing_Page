@@ -1,24 +1,26 @@
-import { Plus, Globe, Bell } from "lucide-react";
+"use client";
+
+import { Link2, Radar, Bell } from "lucide-react";
 import { motion } from "framer-motion";
 
 const steps = [
   {
-    icon: Plus,
+    icon: Link2,
     step: "01",
-    title: "Add your API endpoint",
-    desc: "Paste your URL. Configure check intervals, regions, and alert rules.",
+    title: "Connect your services",
+    desc: "Add API endpoints to monitor, build API flows, or install the lightweight server agent on your infrastructure.",
   },
   {
-    icon: Globe,
+    icon: Radar,
     step: "02",
-    title: "We monitor from global nodes",
-    desc: "Distributed checks run from multiple regions every 30 seconds.",
+    title: "We monitor everything",
+    desc: "Distributed API checks from multiple regions, automated flow execution, and kernel-level server metrics — all running continuously.",
   },
   {
     icon: Bell,
     step: "03",
     title: "Get alerted instantly",
-    desc: "Receive notifications the moment something fails. Respond faster.",
+    desc: "Receive notifications via Slack, Discord, PagerDuty, Email, SMS, or Webhooks the moment something needs attention.",
   },
 ];
 
@@ -31,7 +33,7 @@ const HowItWorksSection = () => (
           <span className="text-gradient">in minutes</span>
         </h2>
         <p className="mt-4 text-muted-foreground text-lg">
-          Three simple steps to never miss downtime again.
+          Three simple steps to full observability.
         </p>
       </div>
 
