@@ -1,0 +1,70 @@
+---
+title: Monitors
+description: Advanced monitor configuration and management in Sysmos.
+---
+
+## Managing Monitors
+
+### List View
+
+The monitors list shows all your configured monitors with:
+
+- Current status (Up / Degraded / Down / Paused)
+- Average response time over the selected time range
+- Uptime percentage
+- Last checked timestamp
+- Number of active alerts
+
+### Pause and Resume
+
+You can pause a monitor during maintenance windows to avoid false alerts:
+
+1. Open the monitor detail page
+2. Click **Pause Monitor**
+3. Optionally set an auto-resume time
+
+Paused monitors don't execute checks and won't trigger alerts.
+
+### Bulk Operations
+
+Select multiple monitors from the list view to:
+- Pause / Resume in bulk
+- Delete multiple monitors
+- Update regions for all selected monitors
+
+## Monitor Detail Page
+
+Clicking on a monitor shows its detail page with:
+
+### Response Time Chart
+A time-series chart showing response times from each monitoring region. Helps identify region-specific latency issues.
+
+### Uptime Timeline
+A visual timeline showing availability over the selected time range. Green = up, red = down, yellow = degraded.
+
+### Recent Checks
+A table of the latest individual check results with:
+- Timestamp
+- Region
+- Response time (broken down: DNS, connect, TLS, TTFB, transfer)
+- Status code
+- Pass/fail status
+
+### Alert History
+List of all alerts triggered by this monitor with timestamps and resolution status.
+
+## Monitor Configuration via API
+
+Monitors can also be managed programmatically via the REST API. See the [API Reference](/docs/api-reference/monitors) for full details.
+
+```bash
+# List all monitors
+curl -H "Authorization: Bearer YOUR_API_KEY" \
+  https://api.sysmos.org/v1/monitors
+
+# Create a monitor
+curl -X POST -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"name": "My API", "url": "https://api.example.com/health", "interval": 60}' \
+  https://api.sysmos.org/v1/monitors
+```

@@ -1,87 +1,82 @@
-import Link from "next/link";
-import { Twitter, Linkedin, Instagram, Github } from "lucide-react";
+import Image from "next/image"
 
-const footerLinks = {
-  Product: [
-    { label: "Features", href: "#features" },
-    { label: "Integrations", href: "#integrations" },
-    { label: "Use Cases", href: "#use-cases" },
-    { label: "FAQ", href: "#faq" },
-  ],
-  Resources: [
-    { label: "Documentation", href: "#" },
-    { label: "API Reference", href: "#" },
-    { label: "Community", href: "#" },
-  ],
-  Company: [
-    { label: "About", href: "#" },
-    { label: "Contact", href: "#" },
-  ],
-  Legal: [
-    { label: "Privacy Policy", href: "/privacy" },
-    { label: "Terms of Service", href: "/terms" },
-  ],
-};
-
-const socialLinks = [
-  { icon: Twitter, label: "Twitter", href: "#" },
-  { icon: Linkedin, label: "LinkedIn", href: "#" },
-  { icon: Github, label: "GitHub", href: "#" },
-];
-
-const Footer = () => (
-  <footer className="w-full border-t bg-background py-10 md:py-16">
-    <div className="mx-auto max-w-7xl px-6">
-      <div className="grid grid-cols-2 gap-8 md:grid-cols-4 lg:grid-cols-5">
-        {/* Brand */}
-        <div className="col-span-2 md:col-span-1 flex flex-col gap-3">
-          <div className="flex items-center gap-2 font-bold text-lg">
-            <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground text-sm font-bold">
-              S
-            </span>
-            <span>Sysmos</span>
+export default function Footer() {
+  return (
+    <footer className="border-t border-[var(--line)] bg-[#fafafb] pt-14 pb-7 mt-24">
+      <div className="max-w-[1240px] mx-auto px-6">
+        <div className="grid grid-cols-1 md:grid-cols-[1.4fr_repeat(4,1fr)] gap-8">
+          {/* Brand */}
+          <div className="flex flex-col gap-3 max-w-[280px]">
+            <div className="flex items-center gap-2.5">
+              <Image src="/logo.png" alt="Sysmos" width={40} height={40} />
+              <span className="font-bold text-lg tracking-tight">Sysmos</span>
+            </div>
+            <p className="text-[13.5px] text-[var(--ink-3)]">
+              Full-stack monitoring for modern infrastructure. From API health to kernel syscalls, observed in one place.
+            </p>
+            <div className="flex gap-2 mt-1 font-mono text-[11.5px] text-[var(--ink-4)]">
+              <span className="inline-flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-[var(--ok)]" />
+                All systems operational
+              </span>
+            </div>
           </div>
-          <p className="text-sm text-muted-foreground leading-relaxed">
-            API monitoring, flow automation, and server observability for modern teams.
-          </p>
+
+          {/* Product */}
+          <div>
+            <h4 className="text-xs font-mono tracking-[0.08em] uppercase text-[var(--ink-4)] mb-3 font-medium">Product</h4>
+            <ul className="flex flex-col gap-2">
+              <li><a href="#" className="text-sm text-[var(--ink-2)] hover:text-[var(--brand-deep)] transition-colors">API monitoring</a></li>
+              <li><a href="#" className="text-sm text-[var(--ink-2)] hover:text-[var(--brand-deep)] transition-colors">Server observability</a></li>
+              <li><a href="#" className="text-sm text-[var(--ink-2)] hover:text-[var(--brand-deep)] transition-colors">Flow builder</a></li>
+              <li><a href="#" className="text-sm text-[var(--ink-2)] hover:text-[var(--brand-deep)] transition-colors">Alerting</a></li>
+              <li><a href="#" className="text-sm text-[var(--ink-2)] hover:text-[var(--brand-deep)] transition-colors">Integrations</a></li>
+            </ul>
+          </div>
+
+          {/* Resources */}
+          <div>
+            <h4 className="text-xs font-mono tracking-[0.08em] uppercase text-[var(--ink-4)] mb-3 font-medium">Resources</h4>
+            <ul className="flex flex-col gap-2">
+              <li><a href="/docs" className="text-sm text-[var(--ink-2)] hover:text-[var(--brand-deep)] transition-colors">Documentation</a></li>
+              {/* <li><a href="#" className="text-sm text-[var(--ink-2)] hover:text-[var(--brand-deep)] transition-colors">API reference</a></li>
+              <li><a href="#" className="text-sm text-[var(--ink-2)] hover:text-[var(--brand-deep)] transition-colors">Changelog</a></li> */}
+              <li><a href="#" className="text-sm text-[var(--ink-2)] hover:text-[var(--brand-deep)] transition-colors">Status page</a></li>
+              <li><a href="#" className="text-sm text-[var(--ink-2)] hover:text-[var(--brand-deep)] transition-colors">Community</a></li>
+            </ul>
+          </div>
+
+          {/* Company */}
+          <div>
+            <h4 className="text-xs font-mono tracking-[0.08em] uppercase text-[var(--ink-4)] mb-3 font-medium">Company</h4>
+            <ul className="flex flex-col gap-2">
+              <li><a href="#" className="text-sm text-[var(--ink-2)] hover:text-[var(--brand-deep)] transition-colors">About</a></li>
+              <li><a href="#" className="text-sm text-[var(--ink-2)] hover:text-[var(--brand-deep)] transition-colors">Blog</a></li>
+              {/* <li><a href="#" className="text-sm text-[var(--ink-2)] hover:text-[var(--brand-deep)] transition-colors">Customers</a></li>
+              <li><a href="#" className="text-sm text-[var(--ink-2)] hover:text-[var(--brand-deep)] transition-colors">Careers</a></li> */}
+              <li><a href="#" className="text-sm text-[var(--ink-2)] hover:text-[var(--brand-deep)] transition-colors">Contact</a></li>
+            </ul>
+          </div>
+
+          {/* Legal */}
+          <div>
+            <h4 className="text-xs font-mono tracking-[0.08em] uppercase text-[var(--ink-4)] mb-3 font-medium">Legal</h4>
+            <ul className="flex flex-col gap-2">
+              <li><a href="/privacy" className="text-sm text-[var(--ink-2)] hover:text-[var(--brand-deep)] transition-colors">Privacy</a></li>
+              <li><a href="/terms" className="text-sm text-[var(--ink-2)] hover:text-[var(--brand-deep)] transition-colors">Terms</a></li>
+              {/* <li><a href="#" className="text-sm text-[var(--ink-2)] hover:text-[var(--brand-deep)] transition-colors">Security</a></li> */}
+              {/* <li><a href="#" className="text-sm text-[var(--ink-2)] hover:text-[var(--brand-deep)] transition-colors">DPA</a></li>
+              <li><a href="#" className="text-sm text-[var(--ink-2)] hover:text-[var(--brand-deep)] transition-colors">SOC 2</a></li> */}
+            </ul>
+          </div>
         </div>
 
-        {/* Link columns */}
-        {Object.entries(footerLinks).map(([category, links]) => (
-          <div key={category} className="flex flex-col gap-2">
-            <div className="font-medium text-sm">{category}</div>
-            {links.map((link) => (
-              <Link
-                key={link.label}
-                href={link.href}
-                className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-              >
-                {link.label}
-              </Link>
-            ))}
-          </div>
-        ))}
-      </div>
-
-      <div className="mt-10 flex flex-col items-center justify-between gap-4 border-t border-border pt-8 md:flex-row">
-        <div className="text-sm text-muted-foreground">
-          &copy; {new Date().getFullYear()} Sysmos. All rights reserved.
-        </div>
-        <div className="flex gap-4">
-          {socialLinks.map((s) => (
-            <Link
-              key={s.label}
-              href={s.href}
-              className="text-muted-foreground transition-colors hover:text-foreground"
-              aria-label={s.label}
-            >
-              <s.icon className="h-5 w-5" />
-            </Link>
-          ))}
+        {/* Bottom */}
+        <div className="mt-10 pt-5 border-t border-[var(--line)] flex justify-between flex-wrap gap-3 text-[12.5px] text-[var(--ink-4)] font-mono">
+          <span>&copy; 2026 Sysmos, Inc. · Built for teams who care about uptime.</span>
+          <span>v2.0 · last deploy 4m ago</span>
         </div>
       </div>
-    </div>
-  </footer>
-);
-
-export default Footer;
+    </footer>
+  )
+}

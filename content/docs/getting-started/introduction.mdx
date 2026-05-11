@@ -1,0 +1,31 @@
+---
+title: Introduction
+description: What is Sysmos and why should you use it for monitoring your infrastructure.
+---
+
+## Why Sysmos?
+
+Modern infrastructure spans multiple services, regions, and layers. Traditional monitoring tools force you to stitch together separate solutions for uptime checks, server metrics, and alerting. Sysmos unifies all of this.
+
+### The Problem
+
+- **Blind spots** — Your API is up in us-east-1 but down in eu-west-1, and you don't know until customers complain.
+- **Surface-level metrics** — CPU and memory aren't enough. You need kernel-level visibility into network connections, disk I/O, and process behavior.
+- **Alert fatigue** — Disconnected tools mean duplicate alerts, missed incidents, and slow response times.
+
+### The Sysmos Solution
+
+| Capability | What It Does |
+|---|---|
+| **Multi-Region API Monitoring** | Health checks from distributed workers across global regions |
+| **eBPF Server Agent** | Kernel-level observability with under 2% CPU overhead |
+| **Unified Dashboard** | Single view for all metrics, alerts, and infrastructure health |
+| **Smart Alerts** | Multi-channel notifications with cooldown and deduplication |
+| **Flow Automation** | Visual API workflow builder for automated testing chains |
+
+### Key Design Principles
+
+- **Low overhead** — The server agent targets less than 2% host CPU usage
+- **Offline resilience** — Local buffering ensures no data loss during network interruptions
+- **Open architecture** — REST APIs, gRPC, and webhook integrations for extensibility
+- **Multi-tenant** — Organization-based access control with granular permissions

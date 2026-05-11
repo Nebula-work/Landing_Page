@@ -1,95 +1,53 @@
-"use client";
+"use client"
 
-import { useState } from "react";
-import Link from "next/link";
-import { Menu, X } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { motion, AnimatePresence } from "framer-motion";
+import Link from "next/link"
+import Image from "next/image"
 
-const navLinks = [
-  { label: "Platform", href: "#product" },
-  { label: "Screenshots", href: "#showcase" },
-  { label: "Features", href: "#features" },
-  { label: "Compare", href: "#comparison" },
-  { label: "FAQ", href: "#faq" },
-];
-
-const Navbar = () => {
-  const [open, setOpen] = useState(false);
-
+export default function Navbar() {
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 border-b border-border/50 bg-background/80 backdrop-blur-xl">
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
-        <a href="#" className="flex items-center gap-2 font-bold text-lg tracking-tight text-foreground">
-          <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground text-sm font-bold">
-            S
-          </span>
-          Sysmos
-        </a>
+    <nav className="sticky top-0 z-50 bg-white/85 backdrop-blur-xl backdrop-saturate-[180%] border-b border-[var(--line)]">
+      <div className="max-w-[1240px] mx-auto px-6 flex items-center justify-between h-16">
+        <Link href="#" className="flex items-center gap-2.5">
+          <Image src="/logo.png" alt="Sysmos" width={40} height={40} />
+          <span className="font-bold text-lg tracking-tight">Sysmos</span>
+          <span className="text-[var(--ink-4)] font-medium text-[13px] ml-1.5 font-mono">/ monitoring</span>
+        </Link>
 
-        {/* Desktop */}
-        <div className="hidden md:flex items-center gap-8">
-          {navLinks.map((l) => (
-            <a
-              key={l.label}
-              href={l.href}
-              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-            >
-              {l.label}
-            </a>
-          ))}
+        <div className="hidden md:flex items-center gap-1">
+          <a href="#product" className="px-3 py-2 rounded-md text-[var(--ink-2)] text-sm font-medium hover:bg-[#fafafb] hover:text-[var(--ink)] transition-colors">
+            Product
+          </a>
+          <a href="#how" className="px-3 py-2 rounded-md text-[var(--ink-2)] text-sm font-medium hover:bg-[#fafafb] hover:text-[var(--ink)] transition-colors">
+            How it works
+          </a>
+          <a href="#features" className="px-3 py-2 rounded-md text-[var(--ink-2)] text-sm font-medium hover:bg-[#fafafb] hover:text-[var(--ink)] transition-colors">
+            Features
+          </a>
+          <a href="#integrations" className="px-3 py-2 rounded-md text-[var(--ink-2)] text-sm font-medium hover:bg-[#fafafb] hover:text-[var(--ink)] transition-colors">
+            Integrations
+          </a>
+          <a href="#pricing" className="px-3 py-2 rounded-md text-[var(--ink-2)] text-sm font-medium hover:bg-[#fafafb] hover:text-[var(--ink)] transition-colors">
+            Pricing
+          </a>
+          <a href="/docs" className="px-3 py-2 rounded-md text-[var(--ink-2)] text-sm font-medium hover:bg-[#fafafb] hover:text-[var(--ink)] transition-colors">
+            Docs
+          </a>
         </div>
-        <div className="hidden md:flex items-center gap-3">
-          <Button variant="ghost" size="sm" className="text-muted-foreground" asChild>
-            <Link href="https://app.sysmos.org/">Log in</Link>
-          </Button>
-          <Button size="sm" asChild>
-            <Link href="https://app.sysmos.org/">Start Free</Link>
-          </Button>
-        </div>
 
-        {/* Mobile toggle */}
-        <button
-          className="md:hidden text-foreground"
-          onClick={() => setOpen(!open)}
-        >
-          {open ? <X size={22} /> : <Menu size={22} />}
-        </button>
-      </div>
-
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            className="md:hidden overflow-hidden border-t border-border/50 bg-background/95 backdrop-blur-xl"
+        <div className="flex items-center gap-2">
+          <a href="https://app.sysmos.org" target="_blank" rel="noopener noreferrer" className="text-[var(--ink-2)] text-sm font-medium px-2 py-2 hover:text-[var(--brand-deep)] transition-colors">
+            Log in
+          </a>
+          <a
+            href="https://app.sysmos.org"
+            target="_blank"
+            className="inline-flex items-center gap-2 bg-[var(--brand)] text-white text-sm font-medium px-4 py-2.5 rounded-lg border border-[var(--brand)] shadow-[0_1px_0_rgba(255,255,255,0.2)_inset,0_1px_2px_rgba(168,85,217,0.35)] hover:bg-[var(--brand-deep)] hover:border-[var(--brand-deep)] transition-all"
           >
-            <div className="flex flex-col gap-4 px-6 py-6">
-              {navLinks.map((l) => (
-                <a
-                  key={l.label}
-                  href={l.href}
-                  className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-                  onClick={() => setOpen(false)}
-                >
-                  {l.label}
-                </a>
-              ))}
-              <div className="flex gap-3 pt-2">
-                <Button variant="ghost" size="sm" className="text-muted-foreground" asChild>
-                  <Link href="https://app.sysmos.org/">Log in</Link>
-                </Button>
-                <Button size="sm" asChild>
-                  <Link href="https://app.sysmos.org/">Start Free</Link>
-                </Button>
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            Start free
+            <span className="opacity-70 font-mono text-xs">→</span>
+          </a>
+        </div>
+      </div>
     </nav>
-  );
-};
-
-export default Navbar;
+  )
+}

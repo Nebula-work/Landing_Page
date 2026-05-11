@@ -1,0 +1,15 @@
+{
+  "title": "Sysmos",
+  "pages": [
+    "---Getting Started---",
+    "getting-started",
+    "---Platform---",
+    "platform",
+    "---Server Agent---",
+    "server-agent",
+    "---API Monitor---",
+    "api-monitor",
+    "---API Reference---",
+    "api-reference"
+  ]
+}

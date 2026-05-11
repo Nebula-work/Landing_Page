@@ -1,0 +1,4 @@
+{
+  "title": "Server Agent",
+  "pages": ["installation", "configuration", "ebpf-metrics", "troubleshooting"]
+}

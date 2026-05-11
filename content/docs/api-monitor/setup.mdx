@@ -1,0 +1,70 @@
+---
+title: Setup
+description: Set up API monitoring in Sysmos to track endpoint health across regions.
+---
+
+API monitoring in Sysmos runs distributed workers that check your endpoints from multiple global regions. Setup takes less than a minute.
+
+## Create Your First Monitor
+
+1. Log in to the [Sysmos dashboard](https://app.sysmos.org)
+2. Navigate to **API Monitors** in the sidebar
+3. Click **Create Monitor**
+4. Fill in the monitor details:
+
+| Field | Description | Example |
+|---|---|---|
+| **Name** | A friendly name for this monitor | `Production API Health` |
+| **URL** | The endpoint to check | `https://api.example.com/health` |
+| **Method** | HTTP method | `GET` |
+| **Interval** | Check frequency | `60s` |
+| **Regions** | Where to run checks from | `US East, EU West` |
+| **Timeout** | Max wait time per check | `10s` |
+
+5. Click **Save**
+
+Your monitor starts running immediately.
+
+## Advanced Options
+
+### Custom Headers
+
+Add headers for authentication or custom routing:
+
+```json
+{
+  "Authorization": "Bearer your-token",
+  "X-Custom-Header": "value"
+}
+```
+
+### Request Body
+
+For `POST`, `PUT`, and `PATCH` monitors, you can specify a JSON request body:
+
+```json
+{
+  "test": true,
+  "timestamp": "{{now}}"
+}
+```
+
+### Assertions
+
+Define conditions that must be met for the check to be considered successful:
+
+- **Status code** — `equals 200`, `in range 200-299`
+- **Response body** — `contains "ok"`, `does not contain "error"`
+- **Response time** — `less than 2000ms`
+- **Headers** — `Content-Type contains application/json`
+
+If any assertion fails, the check is marked as failed and alert rules are evaluated.
+
+## Monitor States
+
+| State | Meaning |
+|---|---|
+| **Up** | All assertions pass from all selected regions |
+| **Degraded** | Assertions fail from some regions but not all |
+| **Down** | Assertions fail from all selected regions |
+| **Paused** | Monitor is manually paused |

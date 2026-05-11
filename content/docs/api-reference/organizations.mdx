@@ -1,0 +1,118 @@
+---
+title: Organizations
+description: Manage organizations and members via the Sysmos API.
+---
+
+Organizations are the top-level container in Sysmos. All monitors, servers, and team members belong to an organization.
+
+## List Organizations
+
+```bash
+GET /v1/organizations
+```
+
+Returns all organizations the authenticated user belongs to.
+
+```json
+{
+  "organizations": [
+    {
+      "id": "org_abc123",
+      "name": "Acme Corp",
+      "role": "owner",
+      "created_at": "2025-01-01T00:00:00Z"
+    }
+  ]
+}
+```
+
+## Get Organization
+
+```bash
+GET /v1/organizations/:id
+```
+
+```json
+{
+  "id": "org_abc123",
+  "name": "Acme Corp",
+  "plan": "pro",
+  "member_count": 5,
+  "monitor_count": 12,
+  "server_count": 8,
+  "created_at": "2025-01-01T00:00:00Z"
+}
+```
+
+## Update Organization
+
+```bash
+PATCH /v1/organizations/:id
+```
+
+**Requires:** `org:update` permission
+
+```json
+{
+  "name": "Acme Corp (Updated)"
+}
+```
+
+## Members
+
+### List Members
+
+```bash
+GET /v1/organizations/:id/members
+```
+
+```json
+{
+  "members": [
+    {
+      "id": "usr_def456",
+      "email": "admin@acme.com",
+      "role": "owner",
+      "joined_at": "2025-01-01T00:00:00Z"
+    },
+    {
+      "id": "usr_ghi789",
+      "email": "dev@acme.com",
+      "role": "member",
+      "joined_at": "2025-01-05T00:00:00Z"
+    }
+  ]
+}
+```
+
+### Invite Member
+
+```bash
+POST /v1/organizations/:id/members/invite
+```
+
+**Requires:** `members:invite` permission
+
+```json
+{
+  "email": "newuser@acme.com",
+  "role": "member"
+}
+```
+
+### Roles
+
+| Role | Permissions |
+|---|---|
+| **Owner** | Full access, billing, delete organization |
+| **Admin** | Manage members, monitors, servers, integrations |
+| **Member** | Create and edit monitors, view servers |
+| **Viewer** | Read-only access to all data |
+
+### Remove Member
+
+```bash
+DELETE /v1/organizations/:id/members/:memberId
+```
+
+**Requires:** `members:remove` permission

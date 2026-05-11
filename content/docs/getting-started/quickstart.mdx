@@ -1,0 +1,55 @@
+---
+title: Quickstart
+description: Get up and running with Sysmos in under 5 minutes.
+---
+
+Get your first monitor running in minutes. This guide walks you through signing up, creating your first API monitor, and installing the server agent.
+
+## Step 1: Create Your Account
+
+Head to [app.sysmos.org](https://app.sysmos.org) and sign up for a free account. You'll be asked to create an organization — this is the top-level container for all your monitors, servers, and team members.
+
+## Step 2: Create an API Monitor
+
+1. Navigate to **API Monitors** in the dashboard sidebar
+2. Click **Create Monitor**
+3. Enter the URL you want to monitor (e.g., `https://api.example.com/health`)
+4. Select the regions you want to monitor from (e.g., US East, EU West, AP Southeast)
+5. Set the check interval (default: 60 seconds)
+6. Click **Save**
+
+Your monitor will start running checks immediately. You'll see response times, status codes, and availability data within a few minutes.
+
+## Step 3: Set Up Alerts
+
+1. Go to **Settings** → **Notifications**
+2. Connect your preferred channels:
+   - **Slack** — Add the Sysmos bot to your workspace
+   - **Discord** — Paste your webhook URL
+   - **Email** — Verified automatically with your account email
+   - **PagerDuty** — Enter your integration key
+   - **Webhook** — Provide any custom HTTP endpoint
+3. Configure alert rules on your monitor (e.g., alert when response time exceeds 2 seconds)
+
+## Step 4: Install the Server Agent
+
+For server-level monitoring, install the Sysmos agent on your Linux servers:
+
+```bash
+curl -fsSL https://get.sysmos.org/install.sh | sudo bash
+```
+
+The installer will:
+- Download the latest agent binary
+- Create a systemd service
+- Set the required Linux capabilities for eBPF
+- Prompt you for your API key (found in **Settings** → **API Keys**)
+
+Once installed, your server will appear in the **Servers** section of the dashboard within 30 seconds.
+
+## Next Steps
+
+- [Dashboard Overview](/docs/platform/dashboard) — Learn your way around the UI
+- [Server Agent Configuration](/docs/server-agent/configuration) — Customize what the agent collects
+- [Monitor Configuration](/docs/api-monitor/monitors) — Advanced monitor settings
+- [Integrations](/docs/api-monitor/integrations) — Connect Slack, Discord, PagerDuty, and more

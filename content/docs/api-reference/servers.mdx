@@ -1,0 +1,116 @@
+---
+title: Servers
+description: Manage server agents and retrieve server metrics via the Sysmos API.
+---
+
+## List Servers
+
+```bash
+GET /v1/servers
+```
+
+**Query Parameters:**
+
+| Parameter | Type | Description |
+|---|---|---|
+| `status` | string | Filter by status: `online`, `offline` |
+| `page` | int | Page number (default: 1) |
+| `limit` | int | Items per page (default: 20) |
+
+**Response:**
+
+```json
+{
+  "servers": [
+    {
+      "id": "srv_abc123",
+      "hostname": "prod-web-01",
+      "os": "Ubuntu 22.04",
+      "kernel": "5.15.0-91-generic",
+      "status": "online",
+      "agent_version": "1.2.0",
+      "last_seen_at": "2025-01-15T10:30:00Z",
+      "registered_at": "2025-01-01T00:00:00Z"
+    }
+  ],
+  "total": 8,
+  "page": 1,
+  "limit": 20
+}
+```
+
+## Get Server
+
+```bash
+GET /v1/servers/:id
+```
+
+Returns full server details including current metrics snapshot.
+
+## Get Server Metrics
+
+```bash
+GET /v1/servers/:id/metrics?period=1h
+```
+
+**Query Parameters:**
+
+| Parameter | Type | Description |
+|---|---|---|
+| `period` | string | Time period: `15m`, `1h`, `6h`, `24h`, `7d` |
+| `metrics` | string | Comma-separated list: `cpu`, `memory`, `disk`, `network`, `tcp` |
+
+**Response:**
+
+```json
+{
+  "server_id": "srv_abc123",
+  "period": "1h",
+  "metrics": {
+    "cpu": {
+      "current_percent": 34.2,
+      "avg_percent": 28.5,
+      "max_percent": 72.1,
+      "cores": 4
+    },
+    "memory": {
+      "used_bytes": 3221225472,
+      "total_bytes": 8589934592,
+      "percent": 37.5,
+      "swap_percent": 0
+    },
+    "disk": {
+      "read_iops": 125,
+      "write_iops": 89,
+      "read_throughput_bps": 5242880,
+      "write_throughput_bps": 2097152,
+      "usage_percent": 45.2
+    },
+    "network": {
+      "rx_bytes_per_sec": 1048576,
+      "tx_bytes_per_sec": 524288,
+      "active_connections": 342
+    }
+  }
+}
+```
+
+## Delete Server
+
+```bash
+DELETE /v1/servers/:id
+```
+
+**Requires:** `servers:delete` permission
+
+Removes the server from your organization. The agent on the server will stop sending data and will need to be re-registered with a new API key to reconnect.
+
+## Regenerate Server Token
+
+```bash
+POST /v1/servers/:id/regenerate-token
+```
+
+**Requires:** `servers:admin` permission
+
+Generates a new authentication token for the server agent. The old token is immediately invalidated — you'll need to update the agent's config with the new token.

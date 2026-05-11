@@ -1,0 +1,119 @@
+---
+title: Troubleshooting
+description: Common issues and solutions for the Sysmos server agent.
+---
+
+## Agent Won't Start
+
+### "BTF not available" error
+
+```
+Error: BTF is not available on this kernel
+```
+
+Your kernel doesn't have BTF (BPF Type Format) support. Check:
+
+```bash
+ls /sys/kernel/btf/vmlinux
+```
+
+If this file doesn't exist, you need to either:
+- Upgrade to a kernel with BTF support (5.8+)
+- Disable eBPF and use standard metrics: set `ebpf_enabled: false` in your config
+
+### Permission denied errors
+
+The agent needs specific Linux capabilities:
+
+```bash
+# Check current capabilities
+sudo getcap /usr/local/bin/sysmos-agent
+
+# Set required capabilities
+sudo setcap 'cap_bpf,cap_perfmon,cap_net_admin+ep' /usr/local/bin/sysmos-agent
+```
+
+If running via systemd, ensure the service file includes:
+
+```ini
+[Service]
+AmbientCapabilities=CAP_BPF CAP_PERFMON CAP_NET_ADMIN
+```
+
+## Agent Not Connecting
+
+### Check network connectivity
+
+```bash
+# Test API endpoint
+curl -s https://api.sysmos.org/health
+
+# Test gRPC endpoint
+nc -zv grpc.sysmos.org 443
+```
+
+### Invalid API key
+
+Check your API key is correct in `/etc/nebula/config.yaml`. You can regenerate a key in the dashboard under **Settings** → **API Keys**.
+
+### Firewall rules
+
+Ensure outbound access on:
+- **443/tcp** — HTTPS API
+- **443/tcp** — gRPC (uses HTTP/2)
+
+## High CPU Usage
+
+If the agent is consuming more than expected CPU:
+
+1. **Increase collection interval**: Change from `10s` to `30s`
+2. **Disable process monitoring**: Set `processes: false` if you don't need per-process metrics
+3. **Check for high-volume eBPF events**: Servers with very high connection rates (>10k/s) may generate excessive TCP tracing events
+
+```yaml
+collection:
+  interval: 30s
+  processes: false
+```
+
+## Buffer Growing Large
+
+If the local buffer is consuming too much disk:
+
+```bash
+# Check buffer size
+du -sh /var/lib/sysmos/buffer/
+```
+
+This typically indicates connectivity issues. The buffer grows when the agent can't reach the backend. Check network connectivity and resolve the upstream issue — the buffer will flush automatically once the connection is restored.
+
+To limit buffer size:
+
+```yaml
+buffer:
+  max_size: 200MB
+```
+
+## View Logs
+
+```bash
+# Real-time logs
+sudo journalctl -u sysmos-agent -f
+
+# Last 100 lines
+sudo journalctl -u sysmos-agent -n 100
+
+# Enable debug logging
+# Set logging.level to "debug" in config, then restart
+sudo systemctl restart sysmos-agent
+```
+
+## Reinstall the Agent
+
+If all else fails, do a clean reinstall:
+
+```bash
+sudo systemctl stop sysmos-agent
+sudo rm /usr/local/bin/sysmos-agent
+curl -fsSL https://get.sysmos.org/install.sh | sudo bash
+```

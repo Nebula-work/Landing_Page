@@ -1,0 +1,89 @@
+---
+title: Authentication
+description: Authenticate with the Sysmos REST API using JWT tokens and API keys.
+---
+
+The Sysmos API uses two authentication methods depending on the use case.
+
+## JWT Tokens (Dashboard / User Sessions)
+
+For user-facing interactions, the API uses JWT (JSON Web Tokens):
+
+```bash
+# Login to get a token
+curl -X POST https://api.sysmos.org/v1/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{"email": "user@example.com", "password": "your-password"}'
+```
+
+Response:
+
+```json
+{
+  "token": "eyJhbGciOiJIUzI1NiIs...",
+  "expires_at": "2025-01-16T10:00:00Z"
+}
+```
+
+Use the token in subsequent requests:
+
+```bash
+curl -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIs..." \
+  https://api.sysmos.org/v1/monitors
+```
+
+## API Keys (Programmatic Access)
+
+For server-to-server integrations and the monitoring agent, use API keys:
+
+```bash
+curl -H "X-API-Key: your-api-key" \
+  https://api.sysmos.org/v1/monitors
+```
+
+Generate API keys in the dashboard under **Settings** → **API Keys**.
+
+### API Key Scopes
+
+| Scope | Access |
+|---|---|
+| `read` | Read-only access to monitors, servers, and alerts |
+| `write` | Create and modify monitors and configurations |
+| `admin` | Full access including organization and member management |
+| `agent` | Server agent registration and metric submission |
+
+## Rate Limits
+
+| Endpoint | Limit |
+|---|---|
+| Authentication | 10 requests/minute |
+| API reads | 100 requests/minute |
+| API writes | 30 requests/minute |
+| Agent metrics | 1000 requests/minute |
+
+Rate limit headers are included in every response:
+
+```
+X-RateLimit-Limit: 100
+X-RateLimit-Remaining: 95
+X-RateLimit-Reset: 1705312800
+```
+
+## Errors
+
+All errors follow a consistent format:
+
+```json
+{
+  "error": {
+    "code": "unauthorized",
+    "message": "Invalid or expired authentication token"
+  }
+}
+```
+
+| Status Code | Meaning |
+|---|---|
+| `401` | Missing or invalid authentication |
+| `403` | Authenticated but insufficient permissions |
+| `429` | Rate limit exceeded |

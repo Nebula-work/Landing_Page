@@ -1,0 +1,4 @@
+{
+  "title": "Platform",
+  "pages": ["dashboard", "server-monitoring", "api-monitoring", "alerts-notifications", "integrations"]
+}

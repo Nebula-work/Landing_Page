@@ -1,0 +1,50 @@
+---
+title: Regions
+description: Understanding multi-region monitoring in Sysmos.
+---
+
+Sysmos runs monitoring workers in multiple global regions to give you a true picture of your API's availability and performance from your users' perspective.
+
+## Available Regions
+
+| Region | Location | ID |
+|---|---|---|
+| **US East** | Virginia, USA | `us-east-1` |
+| **US West** | Oregon, USA | `us-west-2` |
+| **EU West** | Ireland | `eu-west-1` |
+| **EU Central** | Frankfurt, Germany | `eu-central-1` |
+| **AP Southeast** | Singapore | `ap-southeast-1` |
+| **AP Northeast** | Tokyo, Japan | `ap-northeast-1` |
+
+More regions are added regularly. Check the dashboard for the latest available regions.
+
+## How Multi-Region Monitoring Works
+
+When you select multiple regions for a monitor:
+
+1. Each region's worker independently executes checks at the configured interval
+2. Results from all regions are published to Redis Streams
+3. The ingestion service aggregates results and evaluates alert conditions
+4. A monitor is considered **Down** only when it fails from **all** selected regions
+5. If it fails from some but not all regions, it's marked as **Degraded**
+
+This prevents false positives from transient network issues in a single region.
+
+## Region-Specific Insights
+
+The monitor detail page breaks down metrics by region:
+
+- **Per-region response time** — Compare latency across regions
+- **Per-region availability** — See if specific regions have lower reliability
+- **Latency heatmap** — Visual matrix of response times by region and time
+
+## Choosing Regions
+
+Select regions based on where your users are:
+
+- **Global SaaS** — Enable all available regions for comprehensive coverage
+- **US-focused** — US East + US West gives good domestic coverage
+- **Europe-focused** — EU West + EU Central covers most European users
+- **Asia-Pacific** — AP Southeast + AP Northeast for Asian markets
+
+As a general rule, select at least 2 regions for every monitor. This enables the Up/Degraded/Down distinction and reduces false positives.

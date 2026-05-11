@@ -1,0 +1,105 @@
+---
+title: Installation
+description: Detailed installation instructions for all Sysmos components.
+---
+
+## Requirements
+
+### Dashboard & API Access
+
+No installation required — the Sysmos dashboard is available at [app.sysmos.org](https://app.sysmos.org). It works in any modern browser.
+
+### Server Agent
+
+The server agent requires:
+
+- **OS:** Linux (kernel 5.8 or later with BTF support)
+- **Architecture:** x86_64 (amd64)
+- **Permissions:** Root access for installation (the agent runs with specific capabilities, not full root)
+- **Network:** Outbound HTTPS and gRPC access to the Sysmos backend
+
+#### Check Kernel Compatibility
+
+```bash
+# Check kernel version (needs >= 5.8)
+uname -r
+
+# Check BTF support (required for eBPF)
+ls /sys/kernel/btf/vmlinux
+```
+
+### Supported Distributions
+
+| Distribution | Minimum Version |
+|---|---|
+| Ubuntu | 20.04 LTS |
+| Debian | 11 (Bullseye) |
+| RHEL / CentOS | 8.4 |
+| Amazon Linux | 2023 |
+| Fedora | 33 |
+
+## Install the Server Agent
+
+### Quick Install (Recommended)
+
+```bash
+curl -fsSL https://get.sysmos.org/install.sh | sudo bash
+```
+
+The script will prompt for your **API key**, which you can find in the Sysmos dashboard under **Settings** → **API Keys**.
+
+### Manual Install
+
+If you prefer to install manually:
+
+```bash
+# Download the latest release
+wget https://github.com/sysmos/server-agent/releases/latest/download/sysmos-agent-linux-amd64.tar.gz
+
+# Extract
+tar -xzf sysmos-agent-linux-amd64.tar.gz
+
+# Move binary to system path
+sudo mv sysmos-agent /usr/local/bin/
+
+# Create config directory
+sudo mkdir -p /etc/nebula
+
+# Copy the example config
+sudo cp config.example.yaml /etc/nebula/config.yaml
+
+# Edit config with your API key
+sudo nano /etc/nebula/config.yaml
+
+# Install and start the systemd service
+sudo cp sysmos-agent.service /etc/systemd/system/
+sudo systemctl daemon-reload
+sudo systemctl enable --now sysmos-agent
+```
+
+### Verify Installation
+
+```bash
+# Check service status
+sudo systemctl status sysmos-agent
+
+# View agent logs
+sudo journalctl -u sysmos-agent -f
+```
+
+Once the agent is running, your server will appear in the Sysmos dashboard within 30 seconds.
+
+## Uninstall
+
+```bash
+# Stop and disable the service
+sudo systemctl stop sysmos-agent
+sudo systemctl disable sysmos-agent
+
+# Remove files
+sudo rm /usr/local/bin/sysmos-agent
+sudo rm /etc/systemd/system/sysmos-agent.service
+sudo rm -rf /etc/nebula
+
+sudo systemctl daemon-reload
+```

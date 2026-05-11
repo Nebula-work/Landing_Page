@@ -1,0 +1,35 @@
+---
+title: Sysmos Documentation
+description: Learn how to monitor your APIs, automate workflows, and observe server infrastructure with Sysmos.
+---
+
+Welcome to the Sysmos documentation. Sysmos is a full-stack monitoring platform that gives you visibility into your entire infrastructure — from API health checks across multiple regions to kernel-level server observability powered by eBPF.
+
+## What is Sysmos?
+
+Sysmos brings together three core capabilities into one unified platform:
+
+- **API Monitoring** — Distributed health checks from multiple global regions with instant alerts via Slack, Discord, Email, Webhooks, and PagerDuty.
+- **Server Observability** — A lightweight agent powered by eBPF that captures kernel-level metrics with less than 2% CPU overhead.
+- **Centralized Dashboard** — A single pane of glass for all your monitoring data, alerts, and infrastructure health.
+
+## Quick Links
+
+<Cards>
+  <Card title="Quickstart" href="/docs/getting-started/quickstart" />
+  <Card title="Dashboard Overview" href="/docs/platform/dashboard" />
+  <Card title="Install Server Agent" href="/docs/server-agent/installation" />
+  <Card title="Set Up API Monitors" href="/docs/api-monitor/setup" />
+</Cards>
+
+## Architecture Overview
+
+```
+Dashboard (React) → Backend API (Go/Chi) → PostgreSQL, Redis, ClickHouse
+                                         ↑
+API Monitor Workers (multi-region) ──────┘
+                                         ↑
+Server Agent (eBPF) ─── gRPC ───────────┘
+```
+
+The **Backend API** is the central hub. The **Dashboard** communicates with it over REST. **API Monitor Workers** run distributed across regions and publish metrics via Redis Streams to the ingestion pipeline. The **Server Agent** registers via API key handshake and streams metrics over gRPC.

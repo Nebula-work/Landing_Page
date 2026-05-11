@@ -1,0 +1,138 @@
+---
+title: Monitors
+description: Create, update, and manage API monitors via the Sysmos REST API.
+---
+
+## List Monitors
+
+```bash
+GET /v1/monitors
+```
+
+**Query Parameters:**
+
+| Parameter | Type | Description |
+|---|---|---|
+| `status` | string | Filter by status: `up`, `down`, `degraded`, `paused` |
+| `page` | int | Page number (default: 1) |
+| `limit` | int | Items per page (default: 20, max: 100) |
+
+**Response:**
+
+```json
+{
+  "monitors": [
+    {
+      "id": "mon_abc123",
+      "name": "Production API",
+      "url": "https://api.example.com/health",
+      "method": "GET",
+      "interval": 60,
+      "status": "up",
+      "regions": ["us-east-1", "eu-west-1"],
+      "uptime_7d": 99.95,
+      "avg_response_ms": 245,
+      "created_at": "2025-01-01T00:00:00Z"
+    }
+  ],
+  "total": 12,
+  "page": 1,
+  "limit": 20
+}
+```
+
+## Get Monitor
+
+```bash
+GET /v1/monitors/:id
+```
+
+Returns full monitor details including alert rules and recent checks.
+
+## Create Monitor
+
+```bash
+POST /v1/monitors
+```
+
+**Requires:** `monitors:create` permission
+
+```json
+{
+  "name": "Production API",
+  "url": "https://api.example.com/health",
+  "method": "GET",
+  "interval": 60,
+  "timeout": 10,
+  "regions": ["us-east-1", "eu-west-1", "ap-southeast-1"],
+  "headers": {
+    "Authorization": "Bearer token"
+  },
+  "assertions": [
+    { "type": "status_code", "operator": "equals", "value": 200 },
+    { "type": "response_time", "operator": "less_than", "value": 3000 }
+  ]
+}
+```
+
+## Update Monitor
+
+```bash
+PATCH /v1/monitors/:id
+```
+
+**Requires:** `monitors:update` permission
+
+Send only the fields you want to update:
+
+```json
+{
+  "interval": 30,
+  "regions": ["us-east-1", "us-west-2", "eu-west-1"]
+}
+```
+
+## Delete Monitor
+
+```bash
+DELETE /v1/monitors/:id
+```
+
+**Requires:** `monitors:delete` permission
+
+## Pause / Resume
+
+```bash
+POST /v1/monitors/:id/pause
+POST /v1/monitors/:id/resume
+```
+
+## Get Monitor Stats
+
+```bash
+GET /v1/monitors/:id/stats?period=24h
+```
+
+**Query Parameters:**
+
+| Parameter | Type | Description |
+|---|---|---|
+| `period` | string | Time period: `1h`, `6h`, `24h`, `7d`, `30d` |
+| `region` | string | Filter by region ID |
+
+**Response:**
+
+```json
+{
+  "uptime_percent": 99.95,
+  "avg_response_ms": 245,
+  "p95_response_ms": 512,
+  "p99_response_ms": 890,
+  "total_checks": 1440,
+  "failed_checks": 1,
+  "by_region": {
+    "us-east-1": { "avg_response_ms": 180, "uptime_percent": 100 },
+    "eu-west-1": { "avg_response_ms": 310, "uptime_percent": 99.9 }
+  }
+}
+```

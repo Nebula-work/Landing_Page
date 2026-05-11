@@ -1,0 +1,47 @@
+---
+title: Dashboard
+description: Navigate and understand the Sysmos dashboard interface.
+---
+
+The Sysmos dashboard is your central hub for monitoring. It provides a real-time view of your entire infrastructure — API monitors, server metrics, alerts, and team management.
+
+## Overview Page
+
+When you log in, you'll see the **Overview** page with:
+
+- **Uptime summary** — Aggregate availability across all your monitors
+- **Active incidents** — Any ongoing alerts or degraded services
+- **Recent activity** — Latest status changes and alert triggers
+- **Server fleet health** — Quick summary of connected agents
+
+## Navigation
+
+The sidebar provides access to all sections:
+
+| Section | Description |
+|---|---|
+| **Overview** | High-level summary of all monitoring |
+| **API Monitors** | List, create, and manage API health checks |
+| **Servers** | View connected server agents and their metrics |
+| **Alerts** | Alert history and active incidents |
+| **Integrations** | Manage notification channels |
+| **Settings** | Organization, team, API keys, and billing |
+
+## Organizations & Teams
+
+Sysmos is multi-tenant. Each organization has:
+
+- **Members** with role-based access (Owner, Admin, Member, Viewer)
+- **API Keys** for programmatic access and agent authentication
+- **Shared monitors and servers** visible to all members
+
+To invite a team member, go to **Settings** → **Members** → **Invite**.
+
+## Time Ranges
+
+All dashboards support configurable time ranges:
+
+- Last 15 minutes, 1 hour, 6 hours, 24 hours, 7 days, 30 days
+- Custom date range picker
+
+Data is stored in ClickHouse for fast aggregation over large time windows.

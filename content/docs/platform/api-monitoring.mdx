@@ -1,0 +1,46 @@
+---
+title: API Monitoring
+description: How distributed API monitoring works in Sysmos.
+---
+
+Sysmos runs API health checks from distributed workers across multiple global regions. This gives you a true picture of how your APIs perform for users worldwide.
+
+## How It Works
+
+```
+Workers (multi-region) → Redis Streams → Ingest Service → PostgreSQL + ClickHouse
+                                                        ↓
+                                              Notification Service
+                                       (Slack, Discord, Email, Webhook, PagerDuty)
+```
+
+1. **Workers** run in multiple regions and execute HTTP checks against your endpoints
+2. Results are published to **Redis Streams** for reliable message delivery
+3. The **Ingest Service** consumes results, evaluates alert conditions, and stores data in PostgreSQL (configuration) and ClickHouse (time-series metrics)
+4. The **Notification Service** sends alerts through your configured channels with cooldown and deduplication
+
+## Metrics Collected
+
+For each check, Sysmos records:
+
+| Metric | Description |
+|---|---|
+| **Status Code** | HTTP response status |
+| **Response Time** | Total request duration (DNS + connect + TLS + TTFB + transfer) |
+| **DNS Lookup** | Time to resolve the hostname |
+| **TLS Handshake** | Time for the TLS negotiation |
+| **Availability** | Whether the check passed or failed |
+| **Region** | Which worker region executed the check |
+
+## Check Types
+
+- **HTTP/HTTPS** — GET, POST, PUT, DELETE with custom headers and body
+- **Status code validation** — Alert if response code doesn't match expected
+- **Response body validation** — Check if response contains (or doesn't contain) specific text
+- **Response time threshold** — Alert when latency exceeds your threshold
+- **SSL certificate monitoring** — Alerts before certificate expiration
+
+## Data Retention
+
+- **PostgreSQL** — Monitor configuration, alert rules, and recent status
+- **ClickHouse** — Full time-series metrics for historical analysis and fast aggregation

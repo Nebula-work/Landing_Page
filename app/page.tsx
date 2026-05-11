@@ -1,17 +1,11 @@
 import Navbar from "@/components/landing/Navbar"
 import HeroSection from "@/components/landing/HeroSection"
-import SocialProofBar from "@/components/landing/SocialProofBar"
+import TrustStrip from "@/components/landing/TrustStrip"
 import ProductPillarsSection from "@/components/landing/ProductPillarsSection"
-import ProductShowcaseSection from "@/components/landing/ProductShowcaseSection"
-import ProblemSection from "@/components/landing/ProblemSection"
-import FeaturesSection from "@/components/landing/FeaturesSection"
 import HowItWorksSection from "@/components/landing/HowItWorksSection"
-import OpenSourceSection from "@/components/landing/OpenSourceSection"
+import FeaturesSection from "@/components/landing/FeaturesSection"
 import IntegrationsSection from "@/components/landing/IntegrationsSection"
-import ComparisonSection from "@/components/landing/ComparisonSection"
-import TrustSection from "@/components/landing/TrustSection"
-import UseCasesSection from "@/components/landing/UseCasesSection"
-import FAQSection from "@/components/landing/FAQSection"
+import PricingSection from "@/components/landing/PricingSection"
 import CTASection from "@/components/landing/CTASection"
 import Footer from "@/components/landing/Footer"
 
@@ -41,7 +35,7 @@ export default function LandingPage() {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-white text-[#0f1115]" style={{ fontFamily: "Inter, system-ui, sans-serif" }}>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -49,18 +43,12 @@ export default function LandingPage() {
       <Navbar />
       <main>
         <HeroSection />
-        <SocialProofBar />
+        <TrustStrip />
         <ProductPillarsSection />
-        <ProductShowcaseSection />
-        <ProblemSection />
-        <FeaturesSection />
         <HowItWorksSection />
-        <OpenSourceSection />
+        <FeaturesSection />
         <IntegrationsSection />
-        <ComparisonSection />
-        <TrustSection />
-        <UseCasesSection />
-        <FAQSection />
+        <PricingSection />
         <CTASection />
       </main>
       <Footer />

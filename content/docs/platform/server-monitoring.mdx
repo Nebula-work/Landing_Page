@@ -1,0 +1,42 @@
+---
+title: Server Monitoring
+description: Understand server-level observability with the Sysmos eBPF agent.
+---
+
+Sysmos provides deep server observability through a lightweight agent that uses eBPF (extended Berkeley Packet Filter) to collect kernel-level metrics without modifying your applications.
+
+## What Gets Collected
+
+The agent collects metrics across several categories:
+
+### System Metrics
+- **CPU** — Per-core utilization, user vs system time, load averages
+- **Memory** — Used, available, cached, swap usage
+- **Disk** — Read/write IOPS, throughput, latency, space utilization
+- **Network** — Bytes in/out, packets, errors, connection counts
+
+### eBPF-Powered Metrics
+- **TCP connections** — Active connections, new/closed per second, latency distribution
+- **Process monitoring** — Top processes by CPU, memory, and I/O
+- **DNS resolution** — Query latency and failure rates
+- **File I/O** — Per-file read/write latency at the kernel level
+
+## Anomaly Detection
+
+The agent includes built-in **EWMA (Exponentially Weighted Moving Average)** anomaly detection. It learns the baseline behavior of your metrics and alerts when values deviate significantly.
+
+This runs locally on the agent — no data needs to leave your server for anomaly detection to work.
+
+## Offline Resilience
+
+If the network connection to Sysmos is interrupted, the agent buffers metrics locally using **BadgerDB** (up to 500 MB by default). When connectivity is restored, buffered data is automatically flushed to the backend.
+
+## Performance
+
+The agent is designed for minimal impact:
+
+- **Target:** Less than 2% host CPU overhead
+- **Memory:** Typically 30-50 MB RSS
+- **Disk:** Configurable buffer size (default 500 MB)
+
+All eBPF resources are properly cleaned up on shutdown with deferred close handlers.

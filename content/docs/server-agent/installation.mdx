@@ -1,0 +1,55 @@
+---
+title: Agent Installation
+description: Install and set up the Sysmos server monitoring agent on your Linux servers.
+---
+
+The Sysmos server agent is a lightweight binary that runs on your Linux servers to collect system and eBPF metrics.
+
+## Prerequisites
+
+- Linux kernel 5.8+ with BTF support
+- x86_64 architecture
+- Root access for installation
+- Outbound network access to the Sysmos backend
+
+## Quick Install
+
+```bash
+curl -fsSL https://get.sysmos.org/install.sh | sudo bash
+```
+
+The script will:
+1. Detect your system architecture and kernel version
+2. Download the appropriate binary
+3. Create the config directory at `/etc/nebula/`
+4. Install a systemd service
+5. Set required Linux capabilities (`CAP_BPF`, `CAP_PERFMON`, `CAP_NET_ADMIN`)
+6. Prompt for your API key
+
+## Get Your API Key
+
+1. Log in to the Sysmos dashboard at [app.sysmos.org](https://app.sysmos.org)
+2. Go to **Settings** → **API Keys**
+3. Click **Generate New Key**
+4. Copy the key — you'll need it during agent setup
+
+## Verify the Agent
+
+After installation, verify the agent is running:
+
+```bash
+sudo systemctl status sysmos-agent
+```
+
+You should see `active (running)`. Your server will appear in the Sysmos dashboard under **Servers** within 30 seconds.
+
+## How Registration Works
+
+When the agent starts, it performs an **API key handshake** with the Sysmos backend:
+
+1. Agent sends its API key and system metadata (hostname, OS, kernel version)
+2. Backend validates the key and registers the server to your organization
+3. A gRPC channel is established for streaming metrics
+4. The agent begins collecting and transmitting data
+
+If the handshake fails (invalid key, network issue), the agent retries with exponential backoff and buffers metrics locally.

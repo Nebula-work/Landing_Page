@@ -1,0 +1,84 @@
+---
+title: Configuration
+description: Configure the Sysmos server agent with YAML and environment variables.
+---
+
+The agent reads configuration from a YAML file at `/etc/nebula/config.yaml`. Every setting can also be overridden with environment variables.
+
+## Config File
+
+```yaml title="/etc/nebula/config.yaml"
+server:
+  api_key: "your-api-key-here"
+  endpoint: "https://api.sysmos.org"
+  grpc_endpoint: "grpc.sysmos.org:443"
+
+collection:
+  interval: 10s         # How often to collect metrics
+  ebpf_enabled: true    # Enable eBPF-based metrics
+  processes: true       # Collect per-process metrics
+  network: true         # Collect network metrics
+  disk: true            # Collect disk I/O metrics
+
+buffer:
+  enabled: true
+  max_size: 500MB       # Local buffer size for offline resilience
+  path: /var/lib/sysmos/buffer
+
+logging:
+  level: info           # debug, info, warn, error
+  file: /var/log/sysmos/agent.log
+```
+
+## Environment Variable Overrides
+
+Any config key can be overridden using environment variables with the pattern `NEBULA_<SECTION>__<KEY>`:
+
+```bash
+# Override the API key
+export NEBULA_SERVER__API_KEY="your-key"
+
+# Change collection interval
+export NEBULA_COLLECTION__INTERVAL="30s"
+
+# Disable eBPF metrics
+export NEBULA_COLLECTION__EBPF_ENABLED="false"
+
+# Set log level to debug
+export NEBULA_LOGGING__LEVEL="debug"
+```
+
+Note the double underscore (`__`) between section and key.
+
+## Key Settings
+
+### Collection Interval
+
+Controls how frequently metrics are gathered and sent. Lower intervals give more granularity but increase CPU and network usage.
+
+| Interval | Use Case |
+|---|---|
+| `5s` | High-frequency monitoring, debugging |
+| `10s` | Default — good balance of granularity and overhead |
+| `30s` | Lower overhead for less critical servers |
+| `60s` | Minimal monitoring |
+
+### Buffer Settings
+
+The local buffer (backed by BadgerDB) stores metrics when the network is unavailable:
+
+- `max_size` — Maximum disk space for the buffer (default: 500 MB)
+- When the buffer fills up, oldest metrics are dropped to make room
+- On reconnection, buffered data is flushed in chronological order
+
+### eBPF Settings
+
+eBPF probes require kernel 5.8+ with BTF. If your kernel doesn't support it, set `ebpf_enabled: false` to fall back to standard `/proc` and `/sys` based collection.
+
+## Apply Configuration Changes
+
+After editing the config file, restart the agent:
+
+```bash
+sudo systemctl restart sysmos-agent
+```

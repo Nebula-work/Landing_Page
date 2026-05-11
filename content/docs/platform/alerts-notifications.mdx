@@ -1,0 +1,53 @@
+---
+title: Alerts & Notifications
+description: Configure alert rules and notification channels in Sysmos.
+---
+
+Sysmos provides a flexible alerting system with multiple notification channels, intelligent cooldown, and deduplication to prevent alert fatigue.
+
+## Notification Channels
+
+| Channel | Setup |
+|---|---|
+| **Slack** | Install the Sysmos bot in your workspace, select a channel |
+| **Discord** | Provide a webhook URL for your server channel |
+| **Email** | Automatically configured with your account email, add more addresses |
+| **Webhook** | Any HTTP endpoint that accepts POST requests |
+| **PagerDuty** | Enter your PagerDuty integration key |
+
+Configure channels in **Settings** → **Notifications**.
+
+## Alert Rules
+
+Each API monitor can have multiple alert rules:
+
+### Availability Alerts
+- Trigger when a monitor reports **down** from one or more regions
+- Configure how many consecutive failures before alerting
+- Set up auto-resolve when the monitor recovers
+
+### Performance Alerts
+- Trigger when response time exceeds a threshold (e.g., > 2000ms)
+- Use rolling averages to avoid alerting on single spikes
+
+### SSL Certificate Alerts
+- Alert when an SSL certificate is expiring within a configurable window (e.g., 14 days)
+
+## Cooldown & Deduplication
+
+To prevent alert storms:
+
+- **Cooldown period** — After an alert fires, suppress repeat alerts for the same condition for a configurable duration (default: 5 minutes)
+- **Deduplication** — If the same alert condition is already active, new occurrences are grouped rather than sent as separate notifications
+- **Recovery notifications** — Optionally receive an "all clear" when the issue resolves
+
+## Alert History
+
+All alerts are logged with:
+- Timestamp
+- Monitor and region that triggered it
+- Alert condition details
+- Notification channels that were contacted
+- Resolution timestamp (if resolved)
+
+View the full history in **Alerts** → **History** in the dashboard.

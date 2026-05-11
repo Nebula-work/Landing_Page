@@ -1,0 +1,108 @@
+---
+title: Integrations
+description: Connect Sysmos to Slack, Discord, PagerDuty, email, and webhooks for alerts across all products.
+---
+
+Integrations are a platform-level feature in Sysmos. Once configured, any product that supports alerting — API monitors, server agents, and future services — can send notifications through your connected channels.
+
+## Slack
+
+### Setup
+
+1. Go to **Settings** → **Notifications** → **Slack**
+2. Click **Connect Slack**
+3. Authorize the Sysmos bot in your Slack workspace
+4. Select the channel where alerts should be posted
+
+### What You Get
+
+- Rich alert messages with source, status, and relevant metrics
+- Direct links to the affected resource in the Sysmos dashboard
+- Recovery notifications when issues resolve
+
+## Discord
+
+### Setup
+
+1. In Discord, go to **Server Settings** → **Integrations** → **Webhooks**
+2. Create a new webhook and copy the URL
+3. In Sysmos, go to **Settings** → **Notifications** → **Discord**
+4. Paste the webhook URL
+
+### What You Get
+
+- Embedded alert messages with color-coded severity
+- Alert details and relevant metrics
+- Recovery notifications
+
+## Email
+
+### Setup
+
+Your account email is automatically configured. To add more recipients:
+
+1. Go to **Settings** → **Notifications** → **Email**
+2. Add email addresses
+3. Each recipient will receive a verification email
+
+### What You Get
+
+- Formatted HTML email with full alert details
+- Summary of affected resources
+- One-click link to the dashboard
+
+## PagerDuty
+
+### Setup
+
+1. In PagerDuty, create a new service or use an existing one
+2. Add a **Sysmos** integration and copy the integration key
+3. In Sysmos, go to **Settings** → **Notifications** → **PagerDuty**
+4. Paste the integration key
+
+### What You Get
+
+- PagerDuty incidents created automatically on alert
+- Incidents auto-resolve when the issue recovers
+- Full severity mapping (Critical, Warning, Info)
+
+## Webhooks
+
+### Setup
+
+1. Go to **Settings** → **Notifications** → **Webhooks**
+2. Enter your endpoint URL
+3. Optionally add custom headers (e.g., for authentication)
+
+### Payload Format
+
+```json
+{
+  "event": "monitor.down",
+  "monitor": {
+    "id": "mon_abc123",
+    "name": "Production API",
+    "url": "https://api.example.com/health"
+  },
+  "alert": {
+    "status": "down",
+    "region": "us-east-1",
+    "response_time_ms": 5023,
+    "status_code": 503,
+    "triggered_at": "2025-01-15T10:30:00Z"
+  }
+}
+```
+
+### Events
+
+| Event | Source | Description |
+|---|---|---|
+| `monitor.down` | API Monitor | Monitor is down from all regions |
+| `monitor.degraded` | API Monitor | Monitor is failing from some regions |
+| `monitor.recovered` | API Monitor | Monitor has recovered |
+| `monitor.ssl_expiring` | API Monitor | SSL certificate is expiring soon |
+| `server.anomaly` | Server Agent | Anomaly detected on a server metric |
+| `server.offline` | Server Agent | Server agent stopped reporting |
+
+Sysmos will retry failed webhook deliveries up to 3 times with exponential backoff.

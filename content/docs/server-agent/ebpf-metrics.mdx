@@ -1,0 +1,79 @@
+---
+title: eBPF Metrics
+description: Deep dive into the kernel-level metrics collected by the Sysmos eBPF probes.
+---
+
+The Sysmos agent uses [eBPF](https://ebpf.io/) (extended Berkeley Packet Filter) to attach lightweight probes to kernel functions. This provides deep visibility without modifying your applications or requiring kernel modules.
+
+## How It Works
+
+The agent uses the `cilium/ebpf` Go library with `bpf2go` to compile C-based BPF programs into Go bindings at build time. At runtime, the compiled BPF programs are loaded into the kernel and attach to specific tracepoints and kprobes.
+
+All BPF resources are cleaned up on shutdown using deferred close handlers — no kernel state is left behind.
+
+## Metrics Reference
+
+### TCP Connection Tracking
+
+Attaches to `tcp_connect`, `tcp_close`, and related kernel functions.
+
+| Metric | Type | Description |
+|---|---|---|
+| `tcp.active_connections` | Gauge | Current number of active TCP connections |
+| `tcp.connections_per_second` | Rate | New connections established per second |
+| `tcp.close_rate` | Rate | Connections closed per second |
+| `tcp.retransmits` | Counter | TCP segment retransmissions |
+| `tcp.rtt_us` | Histogram | Round-trip time distribution in microseconds |
+
+### DNS Resolution
+
+Monitors DNS query/response via UDP socket tracing.
+
+| Metric | Type | Description |
+|---|---|---|
+| `dns.queries_per_second` | Rate | DNS queries sent per second |
+| `dns.latency_ms` | Histogram | DNS resolution latency distribution |
+| `dns.failures` | Counter | Failed DNS resolutions |
+| `dns.cache_hits` | Counter | Queries served from local cache |
+
+### File I/O
+
+Attaches to VFS read/write functions for per-file I/O visibility.
+
+| Metric | Type | Description |
+|---|---|---|
+| `file.read_latency_us` | Histogram | File read latency distribution |
+| `file.write_latency_us` | Histogram | File write latency distribution |
+| `file.read_bytes` | Counter | Bytes read from disk |
+| `file.write_bytes` | Counter | Bytes written to disk |
+
+### Process Monitoring
+
+Tracks process creation and resource usage via `sched_process_exec` and `sched_process_exit` tracepoints.
+
+| Metric | Type | Description |
+|---|---|---|
+| `process.top_cpu` | Gauge | Top processes by CPU usage |
+| `process.top_memory` | Gauge | Top processes by memory usage |
+| `process.spawn_rate` | Rate | New process creation rate |
+| `process.exit_rate` | Rate | Process exit rate |
+
+## Kernel Requirements
+
+| Feature | Minimum Kernel |
+|---|---|
+| Basic eBPF | 4.15 |
+| BTF support (required) | 5.2 |
+| BPF ring buffer | 5.8 |
+| Full Sysmos agent | **5.8+** |
+
+## Fallback Mode
+
+If eBPF is unavailable (unsupported kernel, insufficient capabilities), the agent falls back to collecting metrics from `/proc` and `/sys`. You'll still get CPU, memory, disk, and network metrics — just without the kernel-level depth.
+
+To explicitly disable eBPF:
+
+```yaml
+collection:
+  ebpf_enabled: false
+```
