@@ -55,7 +55,7 @@ export default function Footer() {
               <li><a href="#" className="text-sm text-[var(--ink-2)] hover:text-[var(--brand-deep)] transition-colors">Blog</a></li>
               {/* <li><a href="#" className="text-sm text-[var(--ink-2)] hover:text-[var(--brand-deep)] transition-colors">Customers</a></li>
               <li><a href="#" className="text-sm text-[var(--ink-2)] hover:text-[var(--brand-deep)] transition-colors">Careers</a></li> */}
-              <li><a href="#" className="text-sm text-[var(--ink-2)] hover:text-[var(--brand-deep)] transition-colors">Contact</a></li>
+              <li><Link href="/contact" className="text-sm text-[var(--ink-2)] hover:text-[var(--brand-deep)] transition-colors">Contact</Link></li>
             </ul>
           </div>
 
