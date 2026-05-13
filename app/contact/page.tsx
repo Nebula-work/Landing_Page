@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 }
 
 const CONTACT_EMAIL = "contact@sysmos.org"
-const DISCORD_URL = "https://discord.gg/pzTncHm8"
+const DISCORD_URL = "https://discord.gg/WdN74xXnzZ"
 
 export default function ContactPage() {
   return (
