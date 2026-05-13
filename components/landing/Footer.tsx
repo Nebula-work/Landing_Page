@@ -1,4 +1,5 @@
 import Image from "next/image"
+import Link from "next/link"
 
 export default function Footer() {
   return (
@@ -26,11 +27,11 @@ export default function Footer() {
           <div>
             <h4 className="text-xs font-mono tracking-[0.08em] uppercase text-[var(--ink-4)] mb-3 font-medium">Product</h4>
             <ul className="flex flex-col gap-2">
-              <li><a href="#" className="text-sm text-[var(--ink-2)] hover:text-[var(--brand-deep)] transition-colors">API monitoring</a></li>
-              <li><a href="#" className="text-sm text-[var(--ink-2)] hover:text-[var(--brand-deep)] transition-colors">Server observability</a></li>
-              <li><a href="#" className="text-sm text-[var(--ink-2)] hover:text-[var(--brand-deep)] transition-colors">Flow builder</a></li>
-              <li><a href="#" className="text-sm text-[var(--ink-2)] hover:text-[var(--brand-deep)] transition-colors">Alerting</a></li>
-              <li><a href="#" className="text-sm text-[var(--ink-2)] hover:text-[var(--brand-deep)] transition-colors">Integrations</a></li>
+              <li><Link href="/products/api-monitoring" className="text-sm text-[var(--ink-2)] hover:text-[var(--brand-deep)] transition-colors">API monitoring</Link></li>
+              <li><Link href="/products/server-observability" className="text-sm text-[var(--ink-2)] hover:text-[var(--brand-deep)] transition-colors">Server observability</Link></li>
+              <li><Link href="/products/flow-builder" className="text-sm text-[var(--ink-2)] hover:text-[var(--brand-deep)] transition-colors">Flow builder</Link></li>
+              <li><Link href="/products/alerting" className="text-sm text-[var(--ink-2)] hover:text-[var(--brand-deep)] transition-colors">Alerting</Link></li>
+              <li><Link href="/products/integrations" className="text-sm text-[var(--ink-2)] hover:text-[var(--brand-deep)] transition-colors">Integrations</Link></li>
             </ul>
           </div>
 
